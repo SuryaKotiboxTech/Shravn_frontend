@@ -41,11 +41,11 @@ export default function Navbar() {
     const payload = JSON.stringify({ channel });
 
     if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
-      navigator.sendBeacon('http://localhost:5000/api/social/click', new Blob([payload], { type: 'application/json' }));
+      navigator.sendBeacon('https://api.rkinteriorstudio.in/api/social/click', new Blob([payload], { type: 'application/json' }));
       return;
     }
 
-    fetch('http://localhost:5000/api/social/click', {
+    fetch('https://api.rkinteriorstudio.in/api/social/click', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       keepalive: true,

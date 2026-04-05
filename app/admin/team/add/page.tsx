@@ -79,7 +79,7 @@ export default function AddTeamMemberPage() {
         const uploadFormData = new FormData();
         uploadFormData.append('image', selectedFile);
 
-        const uploadResponse = await fetch('http://localhost:5000/api/upload', {
+        const uploadResponse = await fetch('https://api.rkinteriorstudio.in/api/upload', {
           method: 'POST',
           body: uploadFormData
         });
@@ -96,7 +96,7 @@ export default function AddTeamMemberPage() {
         imageUrl: finalImageUrl
       };
 
-      const response = await fetch('http://localhost:5000/api/team', {
+      const response = await fetch('https://api.rkinteriorstudio.in/api/team', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(teamData)

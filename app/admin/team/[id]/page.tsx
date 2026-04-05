@@ -61,7 +61,7 @@ const TeamMemberDetailPage = () => {
     const fetchMember = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:5000/api/team/${id}`);
+        const response = await fetch(`https://api.rkinteriorstudio.in/api/team/${id}`);
         if (response.ok) {
           const data = await response.json();
           setMember(data.data);
@@ -97,7 +97,7 @@ const TeamMemberDetailPage = () => {
     setIsSaving(true);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/team/${id}`, {
+      const response = await fetch(`https://api.rkinteriorstudio.in/api/team/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -91,11 +91,11 @@ export default function AdminDashboard() {
         estimatesResponse,
         socialResponse
       ] = await Promise.all([
-        fetch('http://localhost:5000/api/team'),
-        fetch('http://localhost:5000/api/projects'),
-        fetch('http://localhost:5000/api/contact'),
-        fetch('http://localhost:5000/api/estimate'),
-        fetch('http://localhost:5000/api/social')
+        fetch('https://api.rkinteriorstudio.in/api/team'),
+        fetch('https://api.rkinteriorstudio.in/api/projects'),
+        fetch('https://api.rkinteriorstudio.in/api/contact'),
+        fetch('https://api.rkinteriorstudio.in/api/estimate'),
+        fetch('https://api.rkinteriorstudio.in/api/social')
       ]);
 
       const [teamData, projectsData, contactsData, estimatesData, socialData] = await Promise.all([

@@ -77,7 +77,7 @@ export default function ContactDetailsPage() {
 
   const fetchContactDetails = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/contact-details');
+      const response = await fetch('https://api.rkinteriorstudio.in/api/contact-details');
       if (response.ok) {
         const data = await response.json();
         if (data.success && data.data) {
@@ -96,7 +96,7 @@ export default function ContactDetailsPage() {
     setSaving(true);
     setStatusMessage(null);
     try {
-      const response = await fetch('http://localhost:5000/api/contact-details', {
+      const response = await fetch('https://api.rkinteriorstudio.in/api/contact-details', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
