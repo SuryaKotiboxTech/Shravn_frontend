@@ -98,7 +98,7 @@ export default function AddProjectPage() {
       // 1. Upload Featured Image
       const featuredFormData = new FormData();
       featuredFormData.append('image', featuredImage.originalFile);
-      const featuredData = await safeApiCall('http://localhost:5000/api/upload', {
+      const featuredData = await safeApiCall('https://kotiboxglobaltech.site/api/upload', {
         method: 'POST',
         body: featuredFormData
       });
@@ -109,7 +109,7 @@ export default function AddProjectPage() {
         if (!img.originalFile) return img.url;
         const fd = new FormData();
         fd.append('image', img.originalFile);
-        const data = await safeApiCall('http://localhost:5000/api/upload', {
+        const data = await safeApiCall('https://kotiboxglobaltech.site/api/upload', {
           method: 'POST',
           body: fd
         });
@@ -133,7 +133,7 @@ export default function AddProjectPage() {
       };
 
       // 5. Submit to Database
-      await safeApiCall('http://localhost:5000/api/projects', {
+      await safeApiCall('https://kotiboxglobaltech.site/api/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(projectData)

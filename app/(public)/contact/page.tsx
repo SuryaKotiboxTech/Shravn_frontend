@@ -45,7 +45,7 @@ export default function ContactPage() {
 
   const fetchContactDetails = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/contact-details');
+      const response = await fetch('https://kotiboxglobaltech.site/api/contact-details');
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
@@ -70,7 +70,7 @@ export default function ContactPage() {
       const formDataObj = new FormData();
       formDataObj.append('file', file);
 
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch('https://kotiboxglobaltech.site/api/upload', {
         method: 'POST',
         body: formDataObj
       });
@@ -119,7 +119,7 @@ export default function ContactPage() {
         imageUrl: uploadedImage?.url || null
       };
 
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch('https://kotiboxglobaltech.site/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

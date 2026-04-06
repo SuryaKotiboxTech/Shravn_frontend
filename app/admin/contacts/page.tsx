@@ -53,7 +53,7 @@ export default function AdminContactsPage() {
   const fetchContacts = async () => {
     try {
       const query = statusFilter ? `?status=${statusFilter}` : '';
-      const response = await fetch(`http://localhost:5000/api/contact${query}`);
+      const response = await fetch(`https://kotiboxglobaltech.site/api/contact${query}`);
       const data = await response.json();
       if (data.success) {
         setContacts(data.data);
@@ -74,7 +74,7 @@ export default function AdminContactsPage() {
   const updateStatus = async (id: string, status: string, notes?: string) => {
     setUpdating(id);
     try {
-      const response = await fetch(`http://localhost:5000/api/contact/${id}/status`, {
+      const response = await fetch(`https://kotiboxglobaltech.site/api/contact/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status, notes })
@@ -98,7 +98,7 @@ export default function AdminContactsPage() {
     if (!confirm('Are you sure you want to delete this inquiry? This cannot be undone.')) return;
     
     try {
-      const response = await fetch(`http://localhost:5000/api/contact/${id}`, {
+      const response = await fetch(`https://kotiboxglobaltech.site/api/contact/${id}`, {
         method: 'DELETE'
       });
       const data = await response.json();
@@ -120,7 +120,7 @@ export default function AdminContactsPage() {
     setSendingEmail(true);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/contact/${selectedContact._id}/send-email`, {
+      const response = await fetch(`https://kotiboxglobaltech.site/api/contact/${selectedContact._id}/send-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

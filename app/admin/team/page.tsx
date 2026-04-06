@@ -48,7 +48,7 @@ export default function TeamManagement() {
 
   const fetchTeamMembers = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/team');
+      const response = await fetch('https://kotiboxglobaltech.site/api/team');
       const data = await response.json();
       if (data.success) {
         setTeamMembers(data.data);
@@ -64,7 +64,7 @@ export default function TeamManagement() {
     if (!confirm('Are you sure you want to delete this team member?')) return;
     
     try {
-      const response = await fetch(`http://localhost:5000/api/team/${id}`, {
+      const response = await fetch(`https://kotiboxglobaltech.site/api/team/${id}`, {
         method: 'DELETE'
       });
       const data = await response.json();

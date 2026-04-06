@@ -91,11 +91,11 @@ export default function AdminDashboard() {
         estimatesResponse,
         socialResponse
       ] = await Promise.all([
-        fetch('http://localhost:5000/api/team'),
-        fetch('http://localhost:5000/api/projects'),
-        fetch('http://localhost:5000/api/contact'),
-        fetch('http://localhost:5000/api/estimate'),
-        fetch('http://localhost:5000/api/social')
+        fetch('https://kotiboxglobaltech.site/api/team'),
+        fetch('https://kotiboxglobaltech.site/api/projects'),
+        fetch('https://kotiboxglobaltech.site/api/contact'),
+        fetch('https://kotiboxglobaltech.site/api/estimate'),
+        fetch('https://kotiboxglobaltech.site/api/social')
       ]);
 
       const [teamData, projectsData, contactsData, estimatesData, socialData] = await Promise.all([

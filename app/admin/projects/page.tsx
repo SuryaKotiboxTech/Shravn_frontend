@@ -55,7 +55,7 @@ export default function AdminProjectsPage() {
 
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/projects');
+      const response = await fetch('https://kotiboxglobaltech.site/api/projects');
       const data = await response.json();
       if (data.success) {
         setProjects(data.data);
@@ -71,7 +71,7 @@ export default function AdminProjectsPage() {
     if (!confirm('Are you sure you want to delete this project?')) return;
     
     try {
-      const response = await fetch(`http://localhost:5000/api/projects/${id}`, {
+      const response = await fetch(`https://kotiboxglobaltech.site/api/projects/${id}`, {
         method: 'DELETE'
       });
       const data = await response.json();

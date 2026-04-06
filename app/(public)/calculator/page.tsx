@@ -74,7 +74,7 @@ export default function CalculatorPage() {
         customerBudget: formData.budget
       };
 
-      const response = await fetch('http://localhost:5000/api/estimate', {
+      const response = await fetch('https://kotiboxglobaltech.site/api/estimate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(estimatePayload)
