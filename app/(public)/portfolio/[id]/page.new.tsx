@@ -52,7 +52,8 @@ export default function ProjectDetailPage() {
 
   const fetchProject = async (id: string) => {
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/projects/${id}`);
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/projects/${id}`);
       const data = await response.json();
       if (data.success && data.data.isActive) {
         setProject(data.data);

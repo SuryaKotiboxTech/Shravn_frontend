@@ -47,7 +47,8 @@ export default function AdminProjectDetail() {
 
   const fetchProject = useCallback(async () => {
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/projects/${projectId}`);
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/projects/${projectId}`);
       const data = await response.json();
       if (data.success) {
         setProject(data.data);
@@ -74,7 +75,8 @@ export default function AdminProjectDetail() {
     if (!confirm('Are you sure you want to delete this project?')) return;
     
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/projects/${projectId}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/projects/${projectId}`, {
         method: 'DELETE'
       });
       
@@ -90,7 +92,8 @@ export default function AdminProjectDetail() {
     if (!formData) return;
     
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/projects/${projectId}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/projects/${projectId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -113,7 +116,8 @@ export default function AdminProjectDetail() {
     if (!project || !project.isActive) return;
     
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/projects/${projectId}/deactivate`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/projects/${projectId}/deactivate`, {
         method: 'PATCH'
       });
       

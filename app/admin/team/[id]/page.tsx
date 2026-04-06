@@ -61,7 +61,8 @@ const TeamMemberDetailPage = () => {
     const fetchMember = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`https://api.rkinteriorstudio.in/api/team/${id}`);
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const response = await fetch(`${API_URL}/api/team/${id}`);
         if (response.ok) {
           const data = await response.json();
           setMember(data.data);
@@ -97,7 +98,8 @@ const TeamMemberDetailPage = () => {
     setIsSaving(true);
 
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/team/${id}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/team/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -56,7 +56,8 @@ export default function FeaturedProjects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('https://api.rkinteriorstudio.in/api/projects?limit=4');
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const response = await fetch(`${API_URL}/api/projects?limit=4`);
         if (!response.ok) throw new Error('Failed to fetch featured projects');
         const data = await response.json();
         if (data.success && Array.isArray(data.data)) {

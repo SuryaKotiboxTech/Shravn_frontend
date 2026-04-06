@@ -71,8 +71,9 @@ export default function AdminEstimatesPage() {
 
   const fetchEstimates = async () => {
     try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
       const query = statusFilter ? `?status=${statusFilter}` : '';
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/estimate${query}`);
+      const response = await fetch(`${API_URL}/api/estimate${query}`);
       const data = await response.json();
       if (data.success) {
         setEstimates(data.data);
@@ -92,7 +93,8 @@ export default function AdminEstimatesPage() {
   const updateStatus = async (id: string, status: string, adminNotes?: string) => {
     setUpdating(id);
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/estimate/${id}/status`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/estimate/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status, adminNotes })
@@ -116,7 +118,8 @@ export default function AdminEstimatesPage() {
     if (!confirm('Are you sure you want to delete this estimate? This cannot be undone.')) return;
     
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/estimate/${id}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/estimate/${id}`, {
         method: 'DELETE'
       });
       const data = await response.json();
@@ -138,8 +141,9 @@ export default function AdminEstimatesPage() {
     setSendingEmail(true);
 
     try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
       // Assuming you use the same generic send-email endpoint, otherwise adjust URL
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/estimate/${selectedEstimate._id}/send-email`, {
+      const response = await fetch(`${API_URL}/api/estimate/${selectedEstimate._id}/send-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

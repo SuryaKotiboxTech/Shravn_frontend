@@ -38,7 +38,8 @@ export default function ManageAdminsPage() {
 
   const fetchAdmins = async () => {
     try {
-      const response = await fetch('https://api.rkinteriorstudio.in/api/users');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/users`);
       const data = await response.json();
       if (data.success) {
         setAdmins(data.data);
@@ -66,7 +67,8 @@ export default function ManageAdminsPage() {
 
     setCreating(true);
     try {
-      const response = await fetch('https://api.rkinteriorstudio.in/api/users/create-admin', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/users/create-admin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -97,7 +99,8 @@ export default function ManageAdminsPage() {
 
     setDeleting(adminId);
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/users/${adminId}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/users/${adminId}`, {
         method: 'DELETE'
       });
 

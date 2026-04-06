@@ -74,7 +74,8 @@ export default function CalculatorPage() {
         customerBudget: formData.budget
       };
 
-      const response = await fetch('https://api.rkinteriorstudio.in/api/estimate', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/estimate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(estimatePayload)

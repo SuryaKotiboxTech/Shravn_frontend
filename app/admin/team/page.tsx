@@ -48,7 +48,8 @@ export default function TeamManagement() {
 
   const fetchTeamMembers = async () => {
     try {
-      const response = await fetch('https://api.rkinteriorstudio.in/api/team');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/team`);
       const data = await response.json();
       if (data.success) {
         setTeamMembers(data.data);
@@ -64,7 +65,8 @@ export default function TeamManagement() {
     if (!confirm('Are you sure you want to delete this team member?')) return;
     
     try {
-      const response = await fetch(`https://api.rkinteriorstudio.in/api/team/${id}`, {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/team/${id}`, {
         method: 'DELETE'
       });
       const data = await response.json();

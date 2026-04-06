@@ -79,7 +79,8 @@ export default function AddTeamMemberPage() {
         const uploadFormData = new FormData();
         uploadFormData.append('image', selectedFile);
 
-        const uploadResponse = await fetch('https://api.rkinteriorstudio.in/api/upload', {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const uploadResponse = await fetch(`${API_URL}/api/upload`, {
           method: 'POST',
           body: uploadFormData
         });
@@ -96,7 +97,8 @@ export default function AddTeamMemberPage() {
         imageUrl: finalImageUrl
       };
 
-      const response = await fetch('https://api.rkinteriorstudio.in/api/team', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/team`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(teamData)
