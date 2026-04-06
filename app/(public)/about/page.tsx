@@ -27,7 +27,8 @@ export default function AboutPage() {
 
   const fetchTeamMembers = async () => {
     try {
-      const response = await fetch('https://kotiboxglobaltech.site/api/team');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/team`);
       const data = await response.json();
       if (data.success) {
         setTeamMembers(data.data);

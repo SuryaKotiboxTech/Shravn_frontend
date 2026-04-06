@@ -39,13 +39,14 @@ export default function Navbar() {
 
   const trackSocialClick = (channel: string) => {
     const payload = JSON.stringify({ channel });
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
     if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
-      navigator.sendBeacon('https://kotiboxglobaltech.site/api/social/click', new Blob([payload], { type: 'application/json' }));
+      navigator.sendBeacon(`${API_URL}/api/social/click`, new Blob([payload], { type: 'application/json' }));
       return;
     }
 
-    fetch('https://kotiboxglobaltech.site/api/social/click', {
+    fetch(`${API_URL}/api/social/click`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       keepalive: true,

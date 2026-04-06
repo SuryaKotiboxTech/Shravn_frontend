@@ -1,9 +1,9 @@
 ﻿"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, MapPin, Building, Home, Eye } from 'lucide-react';
+import { ArrowRight, MapPin, Building, Loader2 } from 'lucide-react';
 import Navbar from '../../components/layout/Navbar'; // Adjust path
 
 interface Project {
@@ -21,6 +21,13 @@ interface Project {
   materials: string[];
   isActive: boolean;
   order: number;
+}
+
+interface PaginationInfo {
+  currentPage: number;
+  totalPages: number;
+  totalRecords: number;
+  limit: number;
 }
 
 // Premium Fallback Data to prevent crashes if backend is down
@@ -86,14 +93,41 @@ export default function PortfolioPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'residential' | 'commercial'>('all');
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [pagination, setPagination] = useState<PaginationInfo>({
+    currentPage: 1,
+    totalPages: 1,
+    totalRecords: 0,
+    limit: 20
+  });
+  const [hasMore, setHasMore] = useState(true);
+  
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
+  // Initial load - first 20 projects
   useEffect(() => {
-    fetchProjects();
+    fetchProjects(1, true);
   }, []);
 
-  const fetchProjects = async () => {
+  // Reset and refetch when category changes
+  useEffect(() => {
+    setProjects([]);
+    fetchProjects(1, true);
+  }, [selectedCategory]);
+
+  const fetchProjects = async (page: number, isInitial: boolean = false) => {
+    if (isInitial) {
+      setLoading(true);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const response = await fetch('https://kotiboxglobaltech.site/api/projects');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const categoryParam = selectedCategory !== 'all' ? `&category=${selectedCategory}` : '';
+      const response = await fetch(`${API_URL}/api/projects?page=${page}&limit=20${categoryParam}`);
+      
       if (!response.ok) throw new Error("Failed to fetch from backend");
       
       const data = await response.json();
@@ -101,15 +135,53 @@ export default function PortfolioPage() {
         const activeProjects = data.data
           .filter((project: Project) => project.isActive)
           .sort((a: Project, b: Project) => a.order - b.order);
-        setProjects(activeProjects);
+        
+        if (isInitial) {
+          setProjects(activeProjects);
+        } else {
+          setProjects(prev => [...prev, ...activeProjects]);
+        }
+        
+        setPagination(data.pagination);
+        setHasMore(data.pagination.currentPage < data.pagination.totalPages);
       }
     } catch (error) {
       console.warn('Backend unreachable. Loading fallback premium data.', error);
-      setProjects(fallbackProjects);
+      if (isInitial) {
+        setProjects(fallbackProjects);
+        setHasMore(false);
+      }
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
   };
+
+  // Intersection Observer for infinite scroll
+  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
+    const [target] = entries;
+    if (target.isIntersecting && hasMore && !loadingMore) {
+      fetchProjects(pagination.currentPage + 1, false);
+    }
+  }, [hasMore, loadingMore, pagination.currentPage]);
+
+  useEffect(() => {
+    const element = loadMoreRef.current;
+    if (!element) return;
+
+    observerRef.current = new IntersectionObserver(handleObserver, {
+      threshold: 0.1,
+      rootMargin: '100px'
+    });
+
+    observerRef.current.observe(element);
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [handleObserver]);
 
   const filteredProjects = selectedCategory === 'all' 
     ? projects 
@@ -265,10 +337,25 @@ export default function PortfolioPage() {
               </AnimatePresence>
             </motion.div>
           )}
+
+          {/* Infinite Scroll Loading Indicator */}
+          {filteredProjects.length > 0 && (
+            <div ref={loadMoreRef} className="flex justify-center items-center py-12">
+              {loadingMore && (
+                <div className="flex flex-col items-center">
+                  <Loader2 className="w-8 h-8 text-[#a68a6b] animate-spin" />
+                  <p className="text-zinc-500 mt-2 text-sm">Loading more projects...</p>
+                </div>
+              )}
+              {!hasMore && !loadingMore && pagination.totalRecords > 0 && (
+                <p className="text-zinc-400 text-sm uppercase tracking-widest">
+                  Showing all {pagination.totalRecords} projects
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </section>
-      
-    
     </div>
   );
 }

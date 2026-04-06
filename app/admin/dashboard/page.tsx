@@ -84,6 +84,7 @@ export default function AdminDashboard() {
     setRefreshing(true);
     try {
       setError(null);
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
       const [
         teamResponse,
         projectsResponse,
@@ -91,11 +92,11 @@ export default function AdminDashboard() {
         estimatesResponse,
         socialResponse
       ] = await Promise.all([
-        fetch('https://kotiboxglobaltech.site/api/team'),
-        fetch('https://kotiboxglobaltech.site/api/projects'),
-        fetch('https://kotiboxglobaltech.site/api/contact'),
-        fetch('https://kotiboxglobaltech.site/api/estimate'),
-        fetch('https://kotiboxglobaltech.site/api/social')
+        fetch(`${API_URL}/api/team`),
+        fetch(`${API_URL}/api/projects`),
+        fetch(`${API_URL}/api/contact`),
+        fetch(`${API_URL}/api/estimate`),
+        fetch(`${API_URL}/api/social`)
       ]);
 
       const [teamData, projectsData, contactsData, estimatesData, socialData] = await Promise.all([

@@ -70,7 +70,8 @@ const Footer = () => {
         budget: 'not-sure'
       };
 
-      const response = await fetch('https://kotiboxglobaltech.site/api/contact', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

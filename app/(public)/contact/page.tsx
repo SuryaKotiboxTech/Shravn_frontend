@@ -18,6 +18,13 @@ interface ContactDetails {
   phone: string;
   email: string;
   description: string;
+  businessHours?: {
+    [key: string]: {
+      closed?: boolean;
+      open?: string;
+      close?: string;
+    };
+  };
 }
 
 export default function ContactPage() {
@@ -45,7 +52,8 @@ export default function ContactPage() {
 
   const fetchContactDetails = async () => {
     try {
-      const response = await fetch('https://kotiboxglobaltech.site/api/contact-details');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/contact-details`);
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
@@ -70,7 +78,8 @@ export default function ContactPage() {
       const formDataObj = new FormData();
       formDataObj.append('file', file);
 
-      const response = await fetch('https://kotiboxglobaltech.site/api/upload', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/upload`, {
         method: 'POST',
         body: formDataObj
       });
@@ -119,7 +128,8 @@ export default function ContactPage() {
         imageUrl: uploadedImage?.url || null
       };
 
-      const response = await fetch('https://kotiboxglobaltech.site/api/contact', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${API_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -297,7 +307,7 @@ export default function ContactPage() {
                         <span>Loading...</span>
                       ) : contactDetails ? (
                         <>
-                          {Object.entries(contactDetails.businessHours).map(([day, hours]) => (
+                          {Object.entries(contactDetails?.businessHours || {}).map(([day, hours]: [string, any]) => (
                             <div key={day} className="capitalize">
                               <span className="font-medium text-slate-800">{day}:</span>{' '}
                               {hours.closed ? 'Closed' : `${hours.open} - ${hours.close}`}
