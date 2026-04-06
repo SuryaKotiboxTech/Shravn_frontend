@@ -42,11 +42,15 @@ export default function ProjectDetailPage() {
   const fetchProject = async (id: string) => {
     try {
       const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+      console.log('Fetching project from:', `${API_URL}/api/projects/${id}`);
       const response = await fetch(`${API_URL}/api/projects/${id}`);
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
       if (data.success && data.data.isActive) {
         setProject(data.data);
       } else {
+        console.log('Project not active or success false, redirecting...');
         router.push('/portfolio');
       }
     } catch (error) {
