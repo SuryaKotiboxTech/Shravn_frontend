@@ -67,7 +67,7 @@ const Footer = () => {
 
       {/* Background text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <span className="text-[20vw] font-black text-white/[0.02] tracking-tighter font-serif">RK</span>
+        <span className="text-[20vw] font-black text-white/[0.02] tracking-tighter font-serif">SD</span>
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pt-20 pb-10 relative z-10">
@@ -125,11 +125,12 @@ const Footer = () => {
           <div className="lg:col-span-3">
             <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E] mb-6">Contact</h4>
             <div className="space-y-4 text-white/40 text-sm font-light">
-              <p className="leading-relaxed">Jaipur, Rajasthan, India</p>
+              <p className="leading-relaxed">Jaike-e-Jaipur chowpatty, sirsi road, Jaipur</p>
               <p>
-                <a href="mailto:hello@rkinterior.in" className="hover:text-[#C9A96E] transition-colors">hello@rkinterior.in</a>
+                <a href="mailto:sukeradexterity@gmail.com" className="hover:text-[#C9A96E] transition-colors">sukeradexterity@gmail.com</a>
               </p>
-              <p>+91 XXXXX XXXXX</p>
+              <p>+91-8619633247</p>
+              <p>Monday to Friday: 11:00 AM to 6:00 PM</p>
             </div>
           </div>
         </div>
@@ -138,7 +139,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
 
           <p className="text-white/20 text-[9px] uppercase tracking-[0.25em] font-bold">
-            &copy; {year} Sukera -dexterity. All Rights Reserved.
+            &copy; {year} Sukera Dexterity. All Rights Reserved.
           </p>
 
           <div className="flex items-center gap-6">
