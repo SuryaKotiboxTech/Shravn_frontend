@@ -1,77 +1,155 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { Target, Compass } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function MissionVision() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const leftY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const rightY = useTransform(scrollYProgress, [0, 1], [-60, 60]);
+
   return (
-    <section className="relative flex flex-col md:flex-row w-full overflow-hidden border-t border-zinc-200">
-      
-      {/* MISSION SECTION (Crisp White) */}
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full md:w-1/2 bg-white text-slate-900 p-16 md:p-24 lg:p-32 relative flex flex-col justify-center group"
-      >
-        {/* Soft Bronze Glow */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#a68a6b]/5 rounded-full blur-[80px] pointer-events-none group-hover:bg-[#a68a6b]/10 transition-colors duration-700"></div>
+    <section ref={ref} className="relative bg-[#0A0A0A] overflow-hidden">
 
-        <div className="relative z-10 max-w-lg ml-auto">
-          {/* Icon Container */}
-          <div className="inline-flex p-4 bg-zinc-50 border border-zinc-100 rounded-sm mb-8 group-hover:border-[#a68a6b]/40 transition-all duration-500 shadow-sm group-hover:shadow-md">
-            <Target className="w-8 h-8 text-[#a68a6b]" />
-          </div>
-          
-          <h2 className="text-sm font-semibold text-[#a68a6b] uppercase tracking-[0.3em] mb-4 flex items-center gap-4">
-            <span className="h-[1px] w-8 bg-[#a68a6b]"></span> Our Mission
-          </h2>
-          
-          <h3 className="text-4xl md:text-5xl font-serif mb-6 leading-tight text-slate-900 transition-colors duration-500">
-            Built on Detail. Defined by Design.
-          </h3>
-          
-          <p className="text-slate-600 text-lg font-light leading-relaxed">
-            At RK Interior Studio, every space begins with a deep focus on detail—the foundation of exceptional design. From material selection to finishing touches, each element is carefully considered and thoughtfully executed. Our approach goes beyond aesthetics, creating interiors that are refined, functional, and timeless.
-          </p>
+      {/* Decorative BG */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&q=60"
+          alt=""
+          className="w-full h-full object-cover opacity-5"
+        />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+          <span className="text-[25vw] font-black text-white/[0.015] leading-none tracking-tighter font-serif">RK</span>
         </div>
-        
-        {/* Center Divider Line (Visible on Desktop) */}
-        <div className="absolute right-0 top-1/4 bottom-1/4 w-[1px] bg-gradient-to-b from-transparent via-zinc-200 to-transparent hidden md:block z-20"></div>
-      </motion.div>
+      </div>
 
-      {/* VISION SECTION (Soft Pearl / Zinc-50) */}
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="w-full md:w-1/2 bg-zinc-50 text-slate-900 p-16 md:p-24 lg:p-32 relative flex flex-col justify-center group"
-      >
-        {/* Soft Bronze Glow */}
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#a68a6b]/5 rounded-full blur-[80px] pointer-events-none group-hover:bg-[#a68a6b]/10 transition-colors duration-700"></div>
+      {/* Top border */}
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#C9A96E]/40 to-transparent" />
 
-        <div className="relative z-10 max-w-lg mr-auto">
-          {/* Icon Container */}
-          <div className="inline-flex p-4 bg-white border border-zinc-100 rounded-sm mb-8 group-hover:border-[#a68a6b]/40 transition-all duration-500 shadow-sm group-hover:shadow-md">
-            <Compass className="w-8 h-8 text-[#a68a6b]" />
+      <div className="max-w-[1700px] mx-auto px-6 lg:px-12">
+
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center pt-24 pb-16 relative z-10"
+        >
+          <div className="inline-flex items-center gap-4 mb-6">
+            <div className="h-px w-12 bg-[#C9A96E]" />
+            <span className="text-[#C9A96E] text-[9px] font-black uppercase tracking-[0.4em]">Philosophy</span>
+            <div className="h-px w-12 bg-[#C9A96E]" />
           </div>
-          
-          <h2 className="text-sm font-semibold text-[#a68a6b] uppercase tracking-[0.3em] mb-4 flex items-center gap-4">
-            <span className="h-[1px] w-8 bg-[#a68a6b]"></span> Our Vision
+          <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white uppercase tracking-tight leading-none font-serif">
+            How We <span className="italic font-light text-[#C9A96E]">Think</span>
           </h2>
-          
-          <h3 className="text-4xl md:text-5xl font-serif mb-6 leading-tight text-slate-900 transition-colors duration-500">
-            Crafting the essence of modern living.
-          </h3>
-          
-          <p className="text-slate-600 text-lg font-light leading-relaxed">
-            To be globally recognized as the vanguard of contemporary interior design. We envision a future where every space we create acts as a catalyst for personal well-being, aesthetic harmony, and unparalleled living experiences.
-          </p>
-        </div>
-      </motion.div>
+        </motion.div>
 
+        {/* Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/5 mb-24">
+
+          {/* Mission */}
+          <motion.div
+            style={{ y: leftY }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9 }}
+            className="relative bg-[#0A0A0A] p-12 lg:p-20 group overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-[#C9A96E]/20 group-hover:border-[#C9A96E]/60 transition-colors duration-700" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-[#C9A96E]/20 group-hover:border-[#C9A96E]/60 transition-colors duration-700" />
+            <div className="absolute -top-20 -left-20 w-64 h-64 bg-[#C9A96E]/5 rounded-full blur-3xl group-hover:bg-[#C9A96E]/10 transition-colors duration-1000" />
+
+            {/* BG image */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=60" alt="" className="w-full h-full object-cover" />
+            </div>
+
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-10">
+                <span className="text-6xl font-black text-[#C9A96E]/20 leading-none font-serif">01</span>
+                <div>
+                  <p className="text-[#C9A96E] text-[9px] font-black uppercase tracking-[0.4em] mb-1">Our Mission</p>
+                  <div className="h-px w-16 bg-[#C9A96E]" />
+                </div>
+              </div>
+
+              <h3 className="text-3xl xl:text-4xl font-black text-white uppercase leading-tight tracking-tight mb-6 font-serif">
+                Design That<br />
+                <span className="text-[#C9A96E] italic font-light">Transcends</span><br />
+                Time
+              </h3>
+
+              <p className="text-white/40 text-base leading-relaxed font-light mb-10 max-w-md">
+                At Sukera -dexterity, every space begins with a deep focus on detail — the foundation of exceptional design. From material selection to finishing touches, each element is carefully considered and thoughtfully executed.
+              </p>
+
+              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/5">
+                {[{ v: '500+', l: 'Projects' }, { v: '15+', l: 'Years' }, { v: '100%', l: 'Satisfaction' }].map((s, i) => (
+                  <div key={i}>
+                    <div className="text-2xl font-black text-white font-serif mb-1">{s.v}</div>
+                    <div className="text-[9px] uppercase tracking-[0.2em] text-white/30 font-bold">{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Vision */}
+          <motion.div
+            style={{ y: rightY }}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.15 }}
+            className="relative bg-[#111111] p-12 lg:p-20 group overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-[#C9A96E]/20 group-hover:border-[#C9A96E]/60 transition-colors duration-700" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-[#C9A96E]/20 group-hover:border-[#C9A96E]/60 transition-colors duration-700" />
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-[#C9A96E]/5 rounded-full blur-3xl group-hover:bg-[#C9A96E]/10 transition-colors duration-1000" />
+
+            {/* BG image */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=60" alt="" className="w-full h-full object-cover" />
+            </div>
+
+            <div className="relative z-10">
+              <div className="flex items-center gap-4 mb-10">
+                <span className="text-6xl font-black text-[#C9A96E]/20 leading-none font-serif">02</span>
+                <div>
+                  <p className="text-[#C9A96E] text-[9px] font-black uppercase tracking-[0.4em] mb-1">Our Vision</p>
+                  <div className="h-px w-16 bg-[#C9A96E]" />
+                </div>
+              </div>
+
+              <h3 className="text-3xl xl:text-4xl font-black text-white uppercase leading-tight tracking-tight mb-6 font-serif">
+                Shaping The<br />
+                <span className="text-[#C9A96E] italic font-light">Future</span> Of<br />
+                Living
+              </h3>
+
+              <p className="text-white/40 text-base leading-relaxed font-light mb-10 max-w-md">
+                To be globally recognized as the vanguard of contemporary interior design. We envision a future where every space we create acts as a catalyst for personal well-being, aesthetic harmony, and unparalleled living experiences.
+              </p>
+
+              <div className="space-y-3 pt-8 border-t border-white/5">
+                {['Global Recognition', 'Timeless Craft', 'Client-First Approach'].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 bg-[#C9A96E] rotate-45 flex-shrink-0" />
+                    <span className="text-white/40 text-xs uppercase tracking-[0.15em] font-bold">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+      </div>
+
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[#C9A96E]/40 to-transparent" />
     </section>
   );
 }
