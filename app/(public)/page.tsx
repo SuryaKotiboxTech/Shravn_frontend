@@ -50,10 +50,10 @@ const stats = [
 ];
 
 const specialConditions = [
-  { title: 'Support After Completion', desc: 'Our team stays with you even after the project is delivered — continuous care and support.' },
-  { title: 'Familiar Premium Service', desc: 'Maintain your lifestyle while we transform your space with zero disruption.' },
-  { title: 'Personal Design Expert', desc: 'A dedicated architect is your single point of contact throughout the journey.' },
-  { title: 'Special Attention', desc: 'Enhanced service class for discerning clients who expect nothing but excellence.' },
+  { title: 'Support After Completion', desc: 'Our team stays with you even after the project is delivered — continuous care and support.', icon: <CheckCircle className="w-8 h-8 text-[#C9A96E]" /> },
+  { title: 'Familiar Premium Service', desc: 'Maintain your lifestyle while we transform your space with zero disruption.', icon: <CheckCircle className="w-8 h-8 text-[#C9A96E]" /> },
+  { title: 'Personal Design Expert', desc: 'A dedicated architect is your single point of contact throughout the journey.', icon: <CheckCircle className="w-8 h-8 text-[#C9A96E]" /> },
+  { title: 'Special Attention', desc: 'Enhanced service class for discerning clients who expect nothing but excellence.', icon: <CheckCircle className="w-8 h-8 text-[#C9A96E]" /> },
 ];
 
 export default function Home() {
