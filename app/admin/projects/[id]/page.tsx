@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { 
   ArrowLeft, 
   Edit, 
@@ -12,8 +12,21 @@ import {
   Eye,
   EyeOff,
   Save,
-  X
+  X,
+  Plus,
+  Loader2,
+  CheckCircle
 } from 'lucide-react';
+import MediaUpload from '@/components/MediaUpload';
+
+interface UploadedFile {
+  id: string;
+  name: string;
+  url: string;
+  type: 'image' | 'video';
+  size: number;
+  originalFile?: File;
+}
 
 interface Project {
   _id: string;
@@ -43,6 +56,10 @@ export default function AdminProjectDetail() {
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState<Project | null>(null);
+  const [newFeaturedImage, setNewFeaturedImage] = useState<UploadedFile | null>(null);
+  const [newGalleryImages, setNewGalleryImages] = useState<UploadedFile[]>([]);
+  const [isUploadingImages, setIsUploadingImages] = useState(false);
+  const [editSuccess, setEditSuccess] = useState(false);
   const searchParams = useSearchParams();
 
   const fetchProject = useCallback(async () => {
@@ -71,6 +88,40 @@ export default function AdminProjectDetail() {
     }
   }, [project, searchParams]);
 
+  // --- UPLOAD SINGLE FILE TO CLOUDINARY ---
+  const uploadSingleFile = async (file: File) => {
+    const fd = new FormData();
+    fd.append('image', file);
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+    
+    const response = await fetch(`${API_URL}/api/upload`, {
+      method: 'POST',
+      body: fd
+    });
+    const data = await response.json();
+    return data.url;
+  };
+
+  // Gallery Images Handler - STORE NEW SELECTED IMAGES
+  const handleGalleryImagesUpload = useCallback((newFiles: UploadedFile[]) => {
+    console.log('🖼️ New gallery images selected:', newFiles.length);
+    setNewGalleryImages(prev => {
+      const combined = [...prev, ...newFiles];
+      return combined.filter(
+        (file, index, self) =>
+          index === self.findIndex(f => f.name === file.name && f.size === file.size)
+      );
+    });
+  }, []);
+
+  // Featured Image Handler
+  const handleFeaturedImageUpload = useCallback((files: UploadedFile[]) => {
+    console.log('📸 Featured image selected:', files);
+    if (files.length > 0) {
+      setNewFeaturedImage(files[0]);
+    }
+  }, []);
+
   const handleDelete = async () => {
     if (!confirm('Are you sure you want to delete this project?')) return;
     
@@ -92,23 +143,70 @@ export default function AdminProjectDetail() {
     if (!formData) return;
     
     try {
+      setIsUploadingImages(true);
+      console.log('💾 Starting to save project...');
+      
+      // Upload new featured image if any
+      let finalFeaturedImageUrl = formData.featuredImage;
+      
+      if (newFeaturedImage?.originalFile) {
+        console.log(`📸 Uploading new featured image...`);
+        finalFeaturedImageUrl = await uploadSingleFile(newFeaturedImage.originalFile);
+        console.log(`✅ Featured image uploaded`);
+      }
+      
+      // Upload new gallery images if any
+      let allGalleryUrls = [...formData.images];
+      
+      if (newGalleryImages.length > 0) {
+        console.log(`📤 Uploading ${newGalleryImages.length} new gallery images...`);
+        const uploadPromises = newGalleryImages.map(async (img) => {
+          if (img.originalFile) {
+            console.log(`  ⬆️ Uploading: ${img.name}`);
+            return await uploadSingleFile(img.originalFile);
+          }
+          return img.url;
+        });
+        
+        const newUrls = await Promise.all(uploadPromises);
+        allGalleryUrls = [...allGalleryUrls, ...newUrls];
+        console.log(`✅ All new images uploaded. Total: ${allGalleryUrls.length}`);
+      }
+      
+      // Update formData with all images
+      const updatedFormData = {
+        ...formData,
+        featuredImage: finalFeaturedImageUrl,
+        images: allGalleryUrls
+      };
+      
       const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
       const response = await fetch(`${API_URL}/api/projects/${projectId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(updatedFormData)
       });
       
       if (response.ok) {
         const data = await response.json();
         setProject(data.data);
         setFormData(data.data);
+        setNewFeaturedImage(null);
+        setNewGalleryImages([]);
         setIsEditing(false);
+        setEditSuccess(true);
+        console.log('✅ Project saved successfully!');
+        setTimeout(() => {
+          setEditSuccess(false);
+        }, 2000);
       }
     } catch (error) {
       console.error('Error saving project:', error);
+      alert('Error saving project. Check console for details.');
+    } finally {
+      setIsUploadingImages(false);
     }
   };
 
@@ -148,6 +246,22 @@ export default function AdminProjectDetail() {
             Back to Projects
           </Link>
         </div>
+      </div>
+    );
+  }
+
+  if (editSuccess) {
+    return (
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center bg-white p-12 rounded-xl shadow-lg"
+        >
+          <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Project Updated!</h1>
+          <p className="text-gray-500">Your changes have been saved successfully.</p>
+        </motion.div>
       </div>
     );
   }
@@ -215,18 +329,31 @@ export default function AdminProjectDetail() {
                     onClick={() => {
                       setIsEditing(false);
                       setFormData(project);
+                      setNewFeaturedImage(null);
+                      setNewGalleryImages([]);
                     }}
-                    className="flex items-center px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm"
+                    disabled={isUploadingImages}
+                    className="flex items-center px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 text-sm disabled:opacity-50"
                   >
                     <X className="w-4 h-4 mr-2" />
                     Cancel
                   </button>
                   <button
                     onClick={handleSave}
-                    className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm"
+                    disabled={isUploadingImages}
+                    className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm disabled:opacity-70"
                   >
-                    <Save className="w-4 h-4 mr-2" />
-                    Save
+                    {isUploadingImages ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4 mr-2" />
+                        Save
+                      </>
+                    )}
                   </button>
                 </>
               )}
@@ -242,15 +369,72 @@ export default function AdminProjectDetail() {
           <div className="lg:col-span-2 space-y-8">
             {/* Featured Image */}
             <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-              <div className="relative aspect-[16/9] h-96">
-                <Image
-                  src={project.featuredImage}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                  unoptimized
-                />
-              </div>
+              {isEditing && formData ? (
+                <div className="space-y-4 p-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">Featured Image</label>
+                    <div className="space-y-4">
+                      {/* Preview of selected new image */}
+                      {newFeaturedImage ? (
+                        <div className="relative">
+                          <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-blue-300 shadow-md bg-gray-100">
+                            <img src={newFeaturedImage.url} alt="New Featured" className="w-full h-full object-cover" />
+                            <div className="absolute top-2 right-2 px-3 py-1 bg-blue-500 text-white text-xs font-bold rounded">
+                              📤 New
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setNewFeaturedImage(null)}
+                            className="mt-2 px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200"
+                          >
+                            Remove New Image
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="relative w-full h-64 rounded-lg overflow-hidden border-2 border-gray-300 shadow-md bg-gray-100">
+                          <img src={formData.featuredImage} alt="Current Featured" className="w-full h-full object-cover" />
+                          <div className="absolute top-2 right-2 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded">
+                            ✓ Current
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Upload new featured image */}
+                      {!newFeaturedImage && (
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              setNewFeaturedImage({
+                                id: crypto.randomUUID(),
+                                name: file.name,
+                                url: URL.createObjectURL(file),
+                                type: 'image',
+                                size: file.size,
+                                originalFile: file
+                              });
+                            }
+                            e.target.value = '';
+                          }}
+                          className="w-full px-4 py-2.5 bg-blue-50 border-2 border-dashed border-blue-300 rounded-lg cursor-pointer hover:bg-blue-100 transition-colors text-sm"
+                        />
+                      )}
+                      <p className="text-xs text-gray-500">💡 Choose a new image to update the featured image</p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="relative w-full h-96 bg-gray-100">
+                  <img
+                    src={project.featuredImage}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
             </div>
 
             {/* Project Details */}
@@ -417,24 +601,121 @@ export default function AdminProjectDetail() {
             {/* Images Gallery */}
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="text-lg font-semibold text-gray-900 mb-4">Images Gallery</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {project.images.map((image, index) => (
-                  <div key={index} className="relative group">
-                    <div className="relative w-full h-32 rounded-lg overflow-hidden">
-                      <Image
-                        src={image}
-                        alt={`${project.title} ${index + 1}`}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
+              
+              {isEditing && formData ? (
+                <div className="space-y-6">
+                  {/* Existing Images */}
+                  {formData.images.length > 0 && (
+                    <div>
+                      <p className="text-xs text-gray-600 mb-3 font-semibold">📋 Current Images ({formData.images.length}):</p>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        {formData.images.map((image, index) => (
+                          <div key={index} className="relative group">
+                            <div className="relative aspect-square rounded-lg overflow-hidden border-2 border-green-300 shadow-md bg-gray-100">
+                              <img src={image} alt={`Gallery ${index + 1}`} className="w-full h-full object-cover" />
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const updated = formData.images.filter((_, i) => i !== index);
+                                    setFormData({...formData, images: updated});
+                                  }}
+                                  className="p-2 bg-red-600 text-white rounded-full hover:bg-red-700"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
+                            </div>
+                            <p className="text-xs text-gray-600 mt-2 truncate">{index + 1}. Image</p>
+                            <div className="absolute top-1 right-1 px-2 py-1 bg-green-500 text-white text-xs font-bold rounded">
+                              {index + 1}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all rounded-lg flex items-center justify-center">
-                      <ImageIcon className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  )}
+
+                  {/* New Images Selected */}
+                  {newGalleryImages.length > 0 && (
+                    <div className="pt-4 border-t border-gray-200">
+                      <p className="text-xs text-gray-600 mb-3 font-semibold">🆕 New Images ({newGalleryImages.length}):</p>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        {newGalleryImages.map((img, index) => (
+                          <div key={img.id} className="relative group">
+                            <div className="relative aspect-square rounded-lg overflow-hidden border-2 border-blue-300 shadow-md bg-gray-100">
+                              <img src={img.url} alt={img.name} className="w-full h-full object-cover" />
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setNewGalleryImages(prev => prev.filter(i => i.id !== img.id));
+                                  }}
+                                  className="p-2 bg-red-600 text-white rounded-full hover:bg-red-700"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              </div>
+                              <div className="absolute top-1 right-1 px-2 py-1 bg-blue-500 text-white text-xs font-bold rounded">
+                                📤
+                              </div>
+                            </div>
+                            <p className="text-xs text-gray-600 mt-2 truncate">{img.name}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
+                  )}
+
+                  {/* Upload New Images */}
+                  <div className="pt-4 border-t border-gray-200">
+                    <p className="text-xs text-gray-600 mb-3 font-semibold">📤 Add More Images:</p>
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={(e) => {
+                        const files = Array.from(e.target.files || []);
+                        const formatted = files.map(file => ({
+                          id: crypto.randomUUID(),
+                          name: file.name,
+                          url: URL.createObjectURL(file),
+                          type: 'image' as const,
+                          size: file.size,
+                          originalFile: file
+                        }));
+                        
+                        setNewGalleryImages(prev => {
+                          const combined = [...prev, ...formatted];
+                          return combined.filter(
+                            (file, index, self) =>
+                              index === self.findIndex(f => f.name === file.name && f.size === file.size)
+                          );
+                        });
+                        e.target.value = '';
+                      }}
+                      className="w-full px-4 py-2.5 bg-blue-50 border-2 border-dashed border-blue-300 rounded-lg cursor-pointer hover:bg-blue-100 transition-colors"
+                    />
+                    <p className="text-xs text-gray-500 mt-2">
+                      💡 Choose images to add. Click "Save" to upload all new images.
+                    </p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {project.images.map((image, index) => (
+                    <div key={index} className="relative group">
+                      <div className="relative aspect-square rounded-lg overflow-hidden border-2 border-gray-200 shadow-md bg-gray-100">
+                        <img src={image} alt={`Gallery ${index + 1}`} className="w-full h-full object-cover" />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <ImageIcon className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-600 mt-2 truncate">{index + 1}. Image</p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Videos */}

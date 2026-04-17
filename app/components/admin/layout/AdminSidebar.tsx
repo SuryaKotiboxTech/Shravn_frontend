@@ -62,7 +62,7 @@ export default function AdminSidebar({ sidebarOpen = false, setSidebarOpen }: Ad
           <div className={`flex items-center overflow-hidden transition-all duration-300 ${collapsed ? 'w-0 opacity-0' : 'w-36 opacity-100'}`}>
             <div className="relative h-12 w-full">
               <Image 
-                src="/logo1.png" 
+                src="/logo2.png" 
                 alt="Studio Logo" 
                 fill 
                 sizes="144px"
