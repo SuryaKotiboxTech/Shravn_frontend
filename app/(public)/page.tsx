@@ -91,15 +91,20 @@ export default function Home() {
             {/* Eyebrow */}
             <div className="flex items-center gap-4 mb-8">
               <div className="w-12 h-px bg-[#C9A96E]" />
-              <span className="text-[#C9A96E] text-[10px] font-black uppercase tracking-[0.4em]">Award-Winning Interior Studio</span>
+              <span className="text-[#C9A96E] text-[10px] font-black uppercase tracking-[0.4em]">Sukera Dexterity Design Studio</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-6xl sm:text-7xl lg:text-[7rem] xl:text-[9rem] font-black text-white tracking-tighter leading-[0.9] mb-10 font-serif">
               Spaces<br />
-              <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)' }}>That</span><br />
-              <span className="text-[#C9A96E]">Inspire.</span>
+              <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.2)' }}>We've</span><br />
+              <span className="text-[#C9A96E]">Transformed.</span>
             </h1>
+
+            {/* Subtext */}
+            <p className="text-white/60 text-lg leading-relaxed mb-12 max-w-2xl">
+              Thoughtfully designed. Beautifully executed.
+            </p>
 
             <div className="flex flex-col sm:flex-row gap-4 items-start">
               <Link href="/portfolio"
@@ -174,7 +179,7 @@ export default function Home() {
             >
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-8 h-[2px] bg-[#C9A96E]" />
-                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E]">The Studio</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E]">Designed Around You</span>
               </div>
               <h2 className="text-4xl lg:text-6xl font-black text-[#0A0A0A] tracking-tight leading-[1.0] mb-8 font-serif">
                 Crafting Spaces<br />
@@ -182,10 +187,7 @@ export default function Home() {
               </h2>
               <div className="space-y-5 text-[#0A0A0A]/60 text-base leading-relaxed font-light mb-12">
                 <p>
-                  At Sukera -dexterity, every space begins with a deep focus on detail — the foundation of exceptional design. From material selection to finishing touches, each element is carefully considered and thoughtfully executed.
-                </p>
-                <p>
-                  Our approach merges architectural rigor with curated aesthetics — combining premium materials and meticulous attention to detail to create environments that embody elegance and individuality.
+                  At Sukera Dexterity & SP Architects, we design spaces that feel as good as they look. With a focus on creativity, functionality, and detail, we create interiors tailored to your lifestyle — where every space is thoughtfully designed and uniquely yours.
                 </p>
               </div>
               <Link href="/about"
@@ -200,6 +202,16 @@ export default function Home() {
       </section>
 
       {/* ── 3. FEATURED PROJECTS ────────────────────────────── */}
+      <section className="py-32 bg-[#0A0A0A]">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 text-center mb-16">
+          <h2 className="text-4xl lg:text-6xl font-black text-white tracking-tight font-serif mb-4">
+            Our Creations & Concepts
+          </h2>
+          <p className="text-white/40 text-lg leading-relaxed">
+            Designing spaces that inspire and endure.
+          </p>
+        </div>
+      </section>
       <FeaturedProjects />
 
       {/* ── 4. SERVICES ─ Zigzag Cards ──────────────────────── */}
@@ -214,12 +226,12 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-8 h-[2px] bg-[#C9A96E]" />
-                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E]">Capabilities</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E]">Our Proficiency</span>
               </div>
-              <h2 className="text-4xl lg:text-6xl font-black text-white tracking-tight font-serif">Our Expertise</h2>
+              <h2 className="text-4xl lg:text-6xl font-black text-white tracking-tight font-serif">Shaping spaces with knowledge, creativity, and precision.</h2>
             </div>
             <p className="text-white/40 max-w-md text-sm leading-relaxed">
-              Comprehensive design solutions from conceptual architecture to final interior details — tailored to your vision.
+              Design That Performs. Our approach covers every stage of your project with tailored solutions. Starting from design consultation to complete turnkey execution, we focus on creating refined spaces while making the entire process simple and stress-free.
             </p>
           </motion.div>
 
@@ -373,7 +385,107 @@ export default function Home() {
       {/* ── 7. MISSION & VISION ─────────────────────────────── */}
       <MissionVision />
 
-      {/* ── 8. SOCIAL PROOF BANNER ──────────────────────────── */}
+      {/* ── 8. LET'S CONNECT ────────────────────────────────── */}
+      <section className="py-32 bg-white">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-8 h-[2px] bg-[#C9A96E]" />
+              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E]">Let's Connect</span>
+              <div className="w-8 h-[2px] bg-[#C9A96E]" />
+            </div>
+            <h2 className="text-4xl lg:text-6xl font-black text-[#0A0A0A] tracking-tight font-serif mb-8">
+              Together, let's bring something extraordinary to life.
+            </h2>
+            <p className="text-[#0A0A0A]/50 text-lg leading-relaxed max-w-2xl mx-auto">
+              Whether you have a clear vision or just a blank canvas, our team is ready to help you bring your architectural dreams to life.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 9. STUDIO INFORMATION ───────────────────────────── */}
+      <section className="py-32 bg-[#0A0A0A]">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-8 h-[2px] bg-[#C9A96E]" />
+              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E]">Studio Information</span>
+              <div className="w-8 h-[2px] bg-[#C9A96E]" />
+            </div>
+            <h2 className="text-4xl lg:text-6xl font-black text-white tracking-tight font-serif mb-8">
+              Visit Us
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-white/5 backdrop-blur-md border border-white/10 p-8 hover:bg-white/10 transition-all duration-500"
+            >
+              <h3 className="text-[#C9A96E] text-lg font-black uppercase tracking-[0.1em] mb-4">Address</h3>
+              <p className="text-white/60 text-sm leading-relaxed">
+                Jaike-e-Jaipur Chowpatty, Sirsi Road, Jaipur
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white/5 backdrop-blur-md border border-white/10 p-8 hover:bg-white/10 transition-all duration-500"
+            >
+              <h3 className="text-[#C9A96E] text-lg font-black uppercase tracking-[0.1em] mb-4">Call Us</h3>
+              <p className="text-white/60 text-sm leading-relaxed">
+                +91-8619633247
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-white/5 backdrop-blur-md border border-white/10 p-8 hover:bg-white/10 transition-all duration-500"
+            >
+              <h3 className="text-[#C9A96E] text-lg font-black uppercase tracking-[0.1em] mb-4">Email Us</h3>
+              <p className="text-white/60 text-sm leading-relaxed">
+                sukeradexterity@gmail.com
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="bg-white/5 backdrop-blur-md border border-white/10 p-8 hover:bg-white/10 transition-all duration-500"
+            >
+              <h3 className="text-[#C9A96E] text-lg font-black uppercase tracking-[0.1em] mb-4">Business Hours</h3>
+              <p className="text-white/60 text-sm leading-relaxed">
+                Monday to Friday<br />
+                11:00 AM to 6:00 PM
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 10. SOCIAL PROOF BANNER ──────────────────────────── */}
      <section className="relative py-32 lg:py-48 overflow-hidden">
         {/* Background Image & Dark Overlay */}
         <div className="absolute inset-0 z-0">
@@ -442,7 +554,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 9. CTA ──────────────────────────────────────────── */}
+      {/* ── 11. CTA ──────────────────────────────────────────── */}
       <section className="py-32 bg-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=60" alt="" className="w-full h-full object-cover" />

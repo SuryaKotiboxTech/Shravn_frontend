@@ -20,7 +20,7 @@ export default function MissionVision() {
           className="w-full h-full object-cover opacity-5"
         />
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-          <span className="text-[25vw] font-black text-white/[0.015] leading-none tracking-tighter font-serif">RK</span>
+          <span className="text-[25vw] font-black text-white/[0.015] leading-none tracking-tighter font-serif">SD</span>
         </div>
       </div>
 
@@ -43,7 +43,7 @@ export default function MissionVision() {
             <div className="h-px w-12 bg-[#C9A96E]" />
           </div>
           <h2 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white uppercase tracking-tight leading-none font-serif">
-            How We <span className="italic font-light text-[#C9A96E]">Think</span>
+            Our Design <span className="italic font-light text-[#C9A96E]">Philosophy</span>
           </h2>
         </motion.div>
 
@@ -84,7 +84,7 @@ export default function MissionVision() {
               </h3>
 
               <p className="text-white/40 text-base leading-relaxed font-light mb-10 max-w-md">
-                At Sukera -dexterity, every space begins with a deep focus on detail — the foundation of exceptional design. From material selection to finishing touches, each element is carefully considered and thoughtfully executed.
+                We craft sophisticated spaces where elegance meets precision. Through curated materials, refined detailing, and a focus on timeless design, we create interiors that exude luxury while remaining functional and enduring.
               </p>
 
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/5">
@@ -132,7 +132,7 @@ export default function MissionVision() {
               </h3>
 
               <p className="text-white/40 text-base leading-relaxed font-light mb-10 max-w-md">
-                To be globally recognized as the vanguard of contemporary interior design. We envision a future where every space we create acts as a catalyst for personal well-being, aesthetic harmony, and unparalleled living experiences.
+                Inspiring spaces with lasting impact. Developing spaces that combine visual appeal, functionality, and durability—ensuring they influence users positively and perform efficiently in the long run.
               </p>
 
               <div className="space-y-3 pt-8 border-t border-white/5">
