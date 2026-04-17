@@ -71,7 +71,7 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen font-sans selection:text-black" style={{ backgroundColor: THEME.dark, selectionBackgroundColor: THEME.accent }}>
+    <div className="min-h-screen font-sans selection:text-black" style={{ backgroundColor: THEME.dark}}>
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-screen flex items-end overflow-hidden">
