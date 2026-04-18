@@ -61,13 +61,13 @@ const Footer = () => {
   ].filter(s => s.href);
 
   return (
-    <footer className="bg-[#080808] relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-slate-900 to-slate-950 relative overflow-hidden">
       {/* Top gold accent */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#C9A96E] to-transparent" />
+      <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-600 to-transparent" />
 
       {/* Background text */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <span className="text-[20vw] font-black text-white/[0.02] tracking-tighter font-serif">SD</span>
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-5">
+        <span className="text-[20vw] font-bold text-white tracking-tighter font-serif">SD</span>
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pt-20 pb-10 relative z-10">
@@ -78,30 +78,30 @@ const Footer = () => {
           {/* Brand - large */}
           <div className="lg:col-span-5">
             <Link href="/" className="inline-block mb-8">
-<img 
-  src="/logo2.png" 
-  alt="Logo" 
-  className="h-16  object-contain"
-/>
-</Link>
-            <p className="text-white/40 text-sm leading-relaxed font-light max-w-sm mb-8">
+              <img 
+                src="/logo2.png" 
+                alt="Logo" 
+                className="h-14 object-contain"
+              />
+            </Link>
+            <p className="text-slate-400 text-sm leading-relaxed font-light max-w-sm mb-8">
               An award-winning interior design and architecture studio. Crafting refined, timeless environments across India and beyond.
             </p>
             {/* Social media stat */}
-            <div className="border border-[#C9A96E]/20 p-6 inline-block">
-              <div className="text-3xl font-black text-[#C9A96E] font-serif mb-1">2,00,000<span className="text-[#C9A96E]">+</span></div>
-              <div className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold">People follow our journey</div>
+            <div className="border border-amber-700/50 bg-amber-700/10 p-6 inline-block">
+              <div className="text-3xl font-bold text-amber-600 font-serif mb-1">2,00,000<span className="text-amber-500">+</span></div>
+              <div className="text-[9px] uppercase tracking-[0.3em] text-slate-400 font-bold">People follow our journey</div>
             </div>
           </div>
 
           {/* Studio links */}
           <div className="lg:col-span-2">
-            <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E] mb-6">Studio</h4>
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-amber-500 mb-6">Studio</h4>
             <ul className="space-y-4">
               {['Portfolio', 'Services', 'About', 'Contact', 'Calculator'].map(item => (
                 <li key={item}>
                   <Link href={`/${item.toLowerCase()}`}
-                    className="text-white/40 text-sm font-light hover:text-[#C9A96E] transition-colors duration-200 hover:translate-x-1 inline-block">
+                    className="text-slate-400 text-sm font-light hover:text-amber-500 transition-colors duration-200 hover:translate-x-1 inline-block">
                     {item}
                   </Link>
                 </li>
@@ -111,11 +111,11 @@ const Footer = () => {
 
           {/* Services links */}
           <div className="lg:col-span-2">
-            <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E] mb-6">Services</h4>
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-amber-500 mb-6">Services</h4>
             <ul className="space-y-4">
               {['Residential', 'Commercial', 'Turnkey', 'PMC', 'Estimation'].map(item => (
                 <li key={item}>
-                  <span className="text-white/40 text-sm font-light">{item}</span>
+                  <span className="text-slate-400 text-sm font-light">{item}</span>
                 </li>
               ))}
             </ul>
@@ -123,11 +123,11 @@ const Footer = () => {
 
           {/* Contact */}
           <div className="lg:col-span-3">
-            <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-[#C9A96E] mb-6">Contact</h4>
-            <div className="space-y-4 text-white/40 text-sm font-light">
+            <h4 className="text-[9px] font-bold uppercase tracking-[0.4em] text-amber-500 mb-6">Contact</h4>
+            <div className="space-y-4 text-slate-400 text-sm font-light">
               <p className="leading-relaxed">Jaike-e-Jaipur chowpatty, sirsi road, Jaipur</p>
               <p>
-                <a href="mailto:sukeradexterity@gmail.com" className="hover:text-[#C9A96E] transition-colors">sukeradexterity@gmail.com</a>
+                <a href="mailto:sukeradexterity@gmail.com" className="hover:text-amber-500 transition-colors">sukeradexterity@gmail.com</a>
               </p>
               <p>+91-8619633247</p>
               <p>Monday to Friday: 11:00 AM to 6:00 PM</p>
@@ -136,15 +136,15 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="pt-8 border-t border-slate-700 flex flex-col md:flex-row items-center justify-between gap-6">
 
-          <p className="text-white/20 text-[9px] uppercase tracking-[0.25em] font-bold">
+          <p className="text-slate-500 text-[9px] uppercase tracking-[0.25em] font-bold">
             &copy; {year} Sukera Dexterity. All Rights Reserved.
           </p>
 
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-white/20 hover:text-[#C9A96E] text-[9px] uppercase tracking-[0.2em] font-bold transition-colors">Privacy</Link>
-            <Link href="/terms" className="text-white/20 hover:text-[#C9A96E] text-[9px] uppercase tracking-[0.2em] font-bold transition-colors">Terms</Link>
+            <Link href="/privacy" className="text-slate-500 hover:text-amber-500 text-[9px] uppercase tracking-[0.2em] font-bold transition-colors">Privacy</Link>
+            <Link href="/terms" className="text-slate-500 hover:text-amber-500 text-[9px] uppercase tracking-[0.2em] font-bold transition-colors">Terms</Link>
           </div>
 
           {socials.length > 0 && (
@@ -152,7 +152,7 @@ const Footer = () => {
               {socials.map(({ key, href, Icon }) => (
                 <a key={key} href={href} target="_blank" rel="noopener noreferrer"
                   aria-label={key} onClick={() => trackSocialClick(key)}
-                  className="text-white/20 hover:text-[#C9A96E] transition-all duration-200 hover:-translate-y-0.5">
+                  className="text-slate-500 hover:text-amber-500 transition-all duration-200 hover:-translate-y-0.5">
                   <Icon />
                 </a>
               ))}
