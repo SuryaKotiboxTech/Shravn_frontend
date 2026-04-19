@@ -75,51 +75,48 @@ export default function PortfolioPage() {
   const filtered = selectedCategory === 'all' ? projects : projects.filter(p => p.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-[#FAF6EF]">
 
-      {/* ── HERO (Left Exactly as Provided) ── */}
-      <section className="relative min-h-[80vh] flex items-end overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&q=85"
-            alt="Portfolio"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-[#0A0A0A]/20" />
-        </div>
-
-        <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-12 pb-24 pt-48 w-full">
+      {/* ── REFINED EDITORIAL HERO ── */}
+      <section className="relative pt-40 lg:pt-56 pb-20 overflow-hidden bg-[#F5EDD8]">
+        {/* Subtle background radial gradient */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[500px] bg-[radial-gradient(ellipse_at_top,rgba(201,168,76,0.1),transparent_70%)] pointer-events-none" />
+        
+        <div className="relative z-10 max-w-[1700px] mx-auto px-6 lg:px-14 w-full text-center">
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
-            <div className="flex items-center gap-4 mb-8">
-              <div className="h-px w-12 bg-[#C9A96E]" />
-              <span className="text-[#C9A96E] text-[9px] font-black uppercase tracking-[0.4em]">Our Work</span>
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div className="h-px w-12 bg-[#C9A84C]" />
+              <span className="text-[#A07828] text-[9px] font-bold uppercase tracking-[0.4em]">Curated Archives</span>
+              <div className="h-px w-12 bg-[#C9A84C]" />
             </div>
-            <h1 className="text-6xl sm:text-8xl lg:text-[10rem] font-black text-white tracking-tight font-serif leading-none">
-              SELECTED<br />
-              <span className="text-[#C9A96E]">PORTFOLIO</span>
+            
+            <h1 className="text-5xl sm:text-6xl lg:text-[80px] font-bold text-[#2C1F0A] tracking-tight font-serif leading-[1.05]">
+              Selected <br className="sm:hidden" />
+              <span className="text-[#B8872A] italic font-normal">Works.</span>
             </h1>
-            <p className="text-white/50 text-base font-light mt-8 max-w-lg">
-              Explore our collection of architectural masterpieces, where visionary design meets flawless execution.
+            
+            <p className="text-[#7A6040] text-base lg:text-lg font-light mt-8 max-w-2xl mx-auto leading-relaxed">
+              Explore our collection of architectural masterpieces, where visionary design meets flawless execution and timeless elegance.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ── FILTER BAR ── */}
-      <section className="py-6 bg-[#111111] border-b border-white/5 sticky top-[72px] z-30">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
-          <div className="flex items-center gap-10 overflow-x-auto no-scrollbar">
+      {/* ── FILTER BAR (LIGHT & FROSTED) ── */}
+      <section className="py-5 bg-[#FAF6EF]/90 backdrop-blur-md border-b border-[#C9A84C]/20 sticky top-[72px] z-30 shadow-[0_4px_30px_rgba(201,168,76,0.03)]">
+        <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
+          <div className="flex items-center gap-8 md:gap-12 overflow-x-auto no-scrollbar justify-start sm:justify-center">
             {['all', 'residential', 'commercial'].map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat as any)}
-                className={`relative pb-2 text-[10px] font-black uppercase tracking-[0.3em] transition-colors whitespace-nowrap ${
-                  selectedCategory === cat ? 'text-[#C9A96E]' : 'text-white/30 hover:text-white/70'
+                className={`relative pb-2 text-[10px] font-bold uppercase tracking-[0.3em] transition-colors whitespace-nowrap ${
+                  selectedCategory === cat ? 'text-[#B8872A]' : 'text-[#A07828]/60 hover:text-[#2C1F0A]'
                 }`}
               >
                 {cat === 'all' ? 'All Projects' : cat}
                 {selectedCategory === cat && (
-                  <motion.div layoutId="activeFilter" className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C9A96E]" />
+                  <motion.div layoutId="activeFilter" className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C9A84C]" />
                 )}
               </button>
             ))}
@@ -127,53 +124,59 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* ── NEW SMALL CARD GRID ── */}
-      <section className="py-24 bg-[#0A0A0A]">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
+      {/* ── EDITORIAL CARD GRID ── */}
+      <section className="py-24 bg-[#FAF6EF]">
+        <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           {loading ? (
             <div className="flex justify-center items-center py-40">
               <div className="flex flex-col items-center gap-4">
-                <Loader2 className="w-8 h-8 text-[#C9A96E] animate-spin" />
-                <span className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold">Loading Projects</span>
+                <Loader2 className="w-8 h-8 text-[#C9A84C] animate-spin" />
+                <span className="text-[9px] uppercase tracking-[0.3em] text-[#A07828] font-bold">Curating Portfolio</span>
               </div>
             </div>
           ) : filtered.length === 0 ? (
-            <div className="text-center py-40 border border-dashed border-white/10 bg-[#111111]/50 rounded-lg">
-              <Building className="w-12 h-12 text-white/10 mx-auto mb-4" />
-              <p className="text-white/30 font-light">No projects found.</p>
+            <div className="text-center py-40 border border-dashed border-[#C9A84C]/30 bg-[#F5EDD8]/50 rounded-lg">
+              <Building className="w-12 h-12 text-[#C9A84C]/40 mx-auto mb-4" />
+              <p className="text-[#7A6040] font-light">No projects found in this category.</p>
             </div>
           ) : (
-            <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-16">
+            <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
               <AnimatePresence mode="popLayout">
                 {filtered.map((project, index) => (
                   <motion.div
                     layout
-                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    initial={{ opacity: 0, scale: 0.98, y: 30 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    transition={{ duration: 0.6, delay: index * 0.05 }}
                     key={project._id}
                   >
-                    <Link href={`/portfolio/${project._id}`} className="group flex flex-col gap-5 w-full">
+                    <Link href={`/portfolio/${project._id}`} className="group flex flex-col gap-6 w-full h-full">
                       
                       {/* Image Container */}
-                      <div className="relative w-full aspect-[4/5] overflow-hidden bg-[#111111] rounded-sm">
+                      <div className="relative w-full aspect-[4/5] overflow-hidden bg-[#E8D5A8] shadow-[0_10px_40px_rgba(180,130,40,0.05)]">
                         <img
                           src={project.featuredImage}
                           alt={project.title}
-                          className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-105"
                         />
                         
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                          <div className="w-14 h-14 rounded-full bg-[#C9A96E] text-[#0A0A0A] flex items-center justify-center scale-75 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]">
+                        {/* Elegant Inner Frame Hover */}
+                        <div className="absolute inset-4 border border-[#FAF6EF]/0 z-10 pointer-events-none transition-colors duration-700 group-hover:border-[#FAF6EF]/40" />
+
+                        {/* Subtle Dark Gradient for Text Legibility */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1205]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        {/* Hover Circle Button */}
+                        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                          <div className="w-16 h-16 rounded-full bg-[#FAF6EF]/90 backdrop-blur-sm text-[#B8872A] flex items-center justify-center scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-xl">
                             <ArrowUpRight className="w-6 h-6" />
                           </div>
                         </div>
 
                         {/* Category Badge */}
-                        <div className="absolute top-4 left-4">
-                          <span className="bg-[#0A0A0A]/90 backdrop-blur-sm text-[#C9A96E] px-3 py-1.5 text-[8px] font-black uppercase tracking-[0.25em]">
+                        <div className="absolute top-4 left-4 z-20">
+                          <span className="bg-[#FAF6EF]/90 backdrop-blur-sm text-[#B8872A] px-3 py-1.5 text-[8px] font-bold uppercase tracking-[0.3em] shadow-sm">
                             {project.category}
                           </span>
                         </div>
@@ -181,15 +184,15 @@ export default function PortfolioPage() {
 
                       {/* Clean Text Content Below */}
                       <div className="flex flex-col px-1">
-                        <h3 className="text-xl sm:text-2xl font-black text-white font-serif mb-2 group-hover:text-[#C9A96E] transition-colors duration-300">
+                        <h3 className="text-xl sm:text-2xl font-bold text-[#2C1F0A] font-serif mb-3 group-hover:text-[#B8872A] transition-colors duration-300">
                           {project.title}
                         </h3>
-                        <div className="flex items-center gap-3 text-white/40 text-xs font-medium uppercase tracking-[0.1em]">
+                        <div className="flex items-center gap-3 text-[#7A6040] text-xs font-light uppercase tracking-widest">
                           <span className="flex items-center gap-1.5">
-                            <MapPin className="w-3 h-3 text-[#C9A96E]" />
+                            <MapPin className="w-3.5 h-3.5 text-[#C9A84C]" />
                             {project.location}
                           </span>
-                          <span className="w-1 h-1 rounded-full bg-white/20" />
+                          <span className="w-1 h-1 rounded-full bg-[#C9A84C]/40" />
                           <span>{project.completionYear}</span>
                         </div>
                       </div>
@@ -205,15 +208,17 @@ export default function PortfolioPage() {
           <div ref={loadMoreRef} className="flex justify-center pt-24 pb-16">
             {loadingMore && (
               <div className="flex flex-col items-center gap-3">
-                <Loader2 className="w-7 h-7 text-[#C9A96E] animate-spin" />
-                <p className="text-white/30 text-[10px] uppercase tracking-widest">Loading more...</p>
+                <Loader2 className="w-7 h-7 text-[#C9A84C] animate-spin" />
+                <p className="text-[#A07828] text-[9px] font-bold uppercase tracking-[0.3em]">Loading archive...</p>
               </div>
             )}
             {!hasMore && !loadingMore && pagination.totalRecords > 0 && (
               <div className="flex items-center gap-4">
-                <div className="w-10 h-px bg-white/10" />
-                <p className="text-white/20 text-[9px] uppercase tracking-[0.3em]">All {pagination.totalRecords} projects shown</p>
-                <div className="w-10 h-px bg-white/10" />
+                <div className="w-12 h-px bg-[#C9A84C]/30" />
+                <p className="text-[#A07828] text-[9px] font-bold uppercase tracking-[0.3em]">
+                  Displaying all {pagination.totalRecords} works
+                </p>
+                <div className="w-12 h-px bg-[#C9A84C]/30" />
               </div>
             )}
           </div>
