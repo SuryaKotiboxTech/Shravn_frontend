@@ -101,7 +101,7 @@ export default function ProjectDetailPage() {
     return (
       <div className="min-h-screen bg-zinc-50 flex flex-col items-center justify-center font-sans">
         <h1 className="text-3xl font-serif text-slate-900 mb-4">Project Not Found</h1>
-        <Link href="/portfolio" className="text-[#a68a6b] hover:text-[#8b7355] border-b border-[#a68a6b] pb-1 uppercase tracking-widest text-sm font-semibold transition-colors">
+        <Link href="/portfolio" className="text-[#2660A2] hover:text-[#5B96D1] border-b border-[#2660A2] pb-1 uppercase tracking-widest text-sm font-semibold transition-colors">
           Return to Portfolio
         </Link>
       </div>

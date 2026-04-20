@@ -93,17 +93,17 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FAF6EF]">
+    <div className="min-h-screen bg-[#F7FBFF]">
 
       {/* ── 1. HERO ── */}
-      <section className="relative min-h-[95vh] flex items-center lg:items-end pb-0 lg:pb-24 pt-32 overflow-hidden bg-[#2C1F0A]">
+      <section className="relative min-h-[95vh] flex items-center lg:items-end pb-0 lg:pb-24 pt-32 overflow-hidden bg-[#1D325E]">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85"
             alt="Luxury Interior"
             className="w-full h-full object-cover opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#2C1F0A]/20 to-[#2C1F0A]/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#1D325E]/20 to-[#1D325E]/60" />
         </div>
 
         <div className="relative z-10 max-w-[1700px] mx-auto px-6 lg:px-14 w-full flex justify-end">
@@ -111,34 +111,34 @@ export default function AboutPage() {
             initial={{ opacity: 0, x: 40 }} 
             animate={{ opacity: 1, x: 0 }} 
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="w-full lg:w-5/12 xl:w-1/3 bg-[#FAF6EF]/95 backdrop-blur-md p-10 lg:p-16 border border-[#C9A84C]/30 shadow-[0_20px_80px_rgba(44,31,10,0.2)]"
+            className="w-full lg:w-5/12 xl:w-1/3 bg-[#F7FBFF]/95 backdrop-blur-md p-10 lg:p-16 border border-[#5B96D1]/30 shadow-[0_20px_80px_rgba(44,31,10,0.2)]"
           >
             <div className="flex items-center gap-4 mb-8">
-              <div className="h-[1px] w-10 bg-[#C9A84C]" />
-              <span className="text-[#A07828] text-[9px] font-bold uppercase tracking-[0.4em]">About The Studio</span>
+              <div className="h-[1px] w-10 bg-[#5B96D1]" />
+              <span className="text-[#5A7BC1] text-[9px] font-bold uppercase tracking-[0.4em]">About The Studio</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl font-bold text-[#2C1F0A] tracking-tight font-serif leading-[1.1] mb-6">
+            <h1 className="text-4xl sm:text-5xl font-bold text-[#1D325E] tracking-tight font-serif leading-[1.1] mb-6">
               Crafting <br />
-              <span className="text-[#B8872A] italic font-normal">Masterpieces.</span>
+              <span className="text-[#2660A2] italic font-normal">Masterpieces.</span>
             </h1>
             
-            <p className="text-[#7A6040] text-sm leading-relaxed font-light mb-10">
+            <p className="text-[#4A6E9A] text-sm leading-relaxed font-light mb-10">
               We are a collective of visionary designers and interior professionals dedicated to creating enduring, bespoke environments that perfectly balance luxury with liveability.
             </p>
 
             <div className="flex items-center gap-6">
-              <div className="w-12 h-12 rounded-full border border-[#C9A84C] flex items-center justify-center">
-                <FaArrowRight className="w-4 h-4 text-[#B8872A]" />
+              <div className="w-12 h-12 rounded-full border border-[#5B96D1] flex items-center justify-center">
+                <FaArrowRight className="w-4 h-4 text-[#2660A2]" />
               </div>
-              <span className="text-[#2C1F0A] text-[10px] font-bold uppercase tracking-[0.2em]">Discover Our Story</span>
+              <span className="text-[#1D325E] text-[10px] font-bold uppercase tracking-[0.2em]">Discover Our Story</span>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* ── 2. THE STUDIO CONTENT ── */}
-      <section className="bg-[#FAF6EF] py-32 lg:py-48 border-b border-[#C9A84C]/20">
+      <section className="bg-[#F7FBFF] py-32 lg:py-48 border-b border-[#5B96D1]/20">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             
@@ -149,23 +149,23 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
             >
               <div className="flex items-center gap-4 mb-8">
-                <div className="h-[1px] w-8 bg-[#C9A84C]" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">Our Ethos</span>
+                <div className="h-[1px] w-8 bg-[#5B96D1]" />
+                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5A7BC1]">Our Ethos</span>
               </div>
               
-              <h2 className="text-4xl lg:text-6xl font-bold text-[#2C1F0A] font-serif mb-2 leading-tight">Designing spaces that</h2>
-              <h2 className="text-4xl lg:text-6xl font-bold text-[#B8872A] font-serif mb-10 leading-tight italic font-normal">inspire and endure.</h2>
+              <h2 className="text-4xl lg:text-6xl font-bold text-[#1D325E] font-serif mb-2 leading-tight">Designing spaces that</h2>
+              <h2 className="text-4xl lg:text-6xl font-bold text-[#2660A2] font-serif mb-10 leading-tight italic font-normal">inspire and endure.</h2>
               
-              <div className="space-y-6 text-[#7A6040] text-base leading-relaxed font-light mb-12 max-w-lg">
+              <div className="space-y-6 text-[#4A6E9A] text-base leading-relaxed font-light mb-12 max-w-lg">
                 <p>At our Studio, every space begins with a deep focus on detail — the foundation of exceptional design. From material selection to finishing touches, each element is carefully considered and thoughtfully executed.</p>
                 <p>We craft smart, elegant and customised interiors that balance design, comfort and functionality. Our expertise spans residential, commercial and bespoke interior solutions.</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-8 pt-10 border-t border-[#C9A84C]/20">
+              <div className="grid grid-cols-2 gap-8 pt-10 border-t border-[#5B96D1]/20">
                 {[{ v: '15+', l: 'Years Experience' }, { v: '120', l: 'Global Awards' }].map((s, i) => (
                   <div key={i}>
-                    <div className="text-4xl font-bold text-[#2C1F0A] font-serif mb-2">{s.v}</div>
-                    <div className="text-[9px] uppercase tracking-[0.3em] text-[#A07828] font-bold">{s.l}</div>
+                    <div className="text-4xl font-bold text-[#1D325E] font-serif mb-2">{s.v}</div>
+                    <div className="text-[9px] uppercase tracking-[0.3em] text-[#5A7BC1] font-bold">{s.l}</div>
                   </div>
                 ))}
               </div>
@@ -178,21 +178,21 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="relative"
             >
-              <div className="aspect-[3/4] overflow-hidden bg-[#F5EDD8] shadow-[0_20px_80px_rgba(180,130,40,0.1)]">
+              <div className="aspect-[3/4] overflow-hidden bg-[#EFF5FF] shadow-[0_20px_80px_rgba(180,130,40,0.1)]">
                 <img
                   src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000&q=80"
                   alt="Interior Design"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1500ms] ease-out"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-[#C9A84C]/30 -z-10" />
+              <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-[#5B96D1]/30 -z-10" />
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* ── 3. CORE VALUES ── */}
-      <section className="bg-[#F5EDD8] py-32 border-b border-[#C9A84C]/20">
+      <section className="bg-[#EFF5FF] py-32 border-b border-[#5B96D1]/20">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           <motion.div 
             initial={{ opacity: 0, y: 30 }} 
@@ -201,11 +201,11 @@ export default function AboutPage() {
             className="text-center mb-24"
           >
             <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="h-[1px] w-8 bg-[#C9A84C]" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">Our Pillars</span>
-              <div className="h-[1px] w-8 bg-[#C9A84C]" />
+              <div className="h-[1px] w-8 bg-[#5B96D1]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5A7BC1]">Our Pillars</span>
+              <div className="h-[1px] w-8 bg-[#5B96D1]" />
             </div>
-            <h2 className="text-4xl lg:text-6xl font-bold text-[#2C1F0A] font-serif">Core Values</h2>
+            <h2 className="text-4xl lg:text-6xl font-bold text-[#1D325E] font-serif">Core Values</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
@@ -222,11 +222,11 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
                 className="text-center group"
               >
-                <div className="w-20 h-20 mx-auto rounded-full border border-[#C9A84C]/40 flex items-center justify-center mb-8 group-hover:bg-[#C9A84C] group-hover:border-[#C9A84C] transition-colors duration-500 bg-[#FAF6EF]">
-                  <val.icon className="w-8 h-8 text-[#C9A84C] group-hover:text-[#2C1F0A] transition-colors duration-500" strokeWidth={1.5} />
+                <div className="w-20 h-20 mx-auto rounded-full border border-[#5B96D1]/40 flex items-center justify-center mb-8 group-hover:bg-[#5B96D1] group-hover:border-[#5B96D1] transition-colors duration-500 bg-[#F7FBFF]">
+                  <val.icon className="w-8 h-8 text-[#5B96D1] group-hover:text-[#1D325E] transition-colors duration-500" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-2xl font-bold text-[#2C1F0A] font-serif mb-4">{val.title}</h3>
-                <p className="text-[#7A6040] font-light leading-relaxed text-sm max-w-sm mx-auto">{val.desc}</p>
+                <h3 className="text-2xl font-bold text-[#1D325E] font-serif mb-4">{val.title}</h3>
+                <p className="text-[#4A6E9A] font-light leading-relaxed text-sm max-w-sm mx-auto">{val.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -234,7 +234,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 4. FOUNDER (EDITORIAL OVERLAP DESIGN) ── */}
-      <section className="py-32 lg:py-48 bg-[#FAF6EF] overflow-hidden border-b border-[#C9A84C]/20">
+      <section className="py-32 lg:py-48 bg-[#F7FBFF] overflow-hidden border-b border-[#5B96D1]/20">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           
           {founder ? (
@@ -246,29 +246,29 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="w-full lg:w-5/12 bg-[#F5EDD8] p-10 lg:p-16 xl:p-20 relative z-20 shadow-[0_20px_80px_rgba(180,130,40,0.1)] lg:translate-x-16"
+                className="w-full lg:w-5/12 bg-[#EFF5FF] p-10 lg:p-16 xl:p-20 relative z-20 shadow-[0_20px_80px_rgba(180,130,40,0.1)] lg:translate-x-16"
               >
                 <div className="flex items-center gap-4 mb-10">
-                  <div className="h-[1px] w-10 bg-[#C9A84C]" />
-                  <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">The Visionary</span>
+                  <div className="h-[1px] w-10 bg-[#5B96D1]" />
+                  <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5A7BC1]">The Visionary</span>
                 </div>
                 
-                <h2 className="text-5xl lg:text-7xl font-bold text-[#2C1F0A] font-serif mb-6 leading-none">
+                <h2 className="text-5xl lg:text-7xl font-bold text-[#1D325E] font-serif mb-6 leading-none">
                   {founder.name}
                 </h2>
                 
-                <span className="text-[10px] uppercase tracking-[0.3em] text-[#C9A84C] font-bold block mb-12">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-[#5B96D1] font-bold block mb-12">
                   {founder.title}
                 </span>
 
                 <div className="relative">
-                  <div className="absolute -top-6 -left-4 text-[6rem] text-[#C9A84C]/20 font-serif font-black leading-none pointer-events-none">"</div>
-                  <p className="text-2xl text-[#2C1F0A] font-light leading-relaxed mb-8 italic relative z-10 font-serif">
+                  <div className="absolute -top-6 -left-4 text-[6rem] text-[#5B96D1]/20 font-serif font-black leading-none pointer-events-none">"</div>
+                  <p className="text-2xl text-[#1D325E] font-light leading-relaxed mb-8 italic relative z-10 font-serif">
                     {founder.quote}
                   </p>
                 </div>
                 
-                <p className="text-[#7A6040] font-light text-sm leading-relaxed max-w-md">
+                <p className="text-[#4A6E9A] font-light text-sm leading-relaxed max-w-md">
                   {founder.bio || "Dedicated to pushing the boundaries of spatial design, crafting environments that elevate the human experience through harmony, texture, and light."}
                 </p>
               </motion.div>
@@ -291,37 +291,37 @@ export default function AboutPage() {
             </div>
           ) : (
             <div className="text-center py-20">
-              <div className="w-8 h-8 border-2 border-[#C9A84C]/20 border-t-[#C9A84C] rounded-full animate-spin mx-auto" />
+              <div className="w-8 h-8 border-2 border-[#5B96D1]/20 border-t-[#5B96D1] rounded-full animate-spin mx-auto" />
             </div>
           )}
         </div>
       </section>
 
       {/* ── 5. TEAM (HIGH-FASHION GRID) ── */}
-      <section className="py-32 lg:py-48 bg-[#F5EDD8] border-b border-[#C9A84C]/20">
+      <section className="py-32 lg:py-48 bg-[#EFF5FF] border-b border-[#5B96D1]/20">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20 lg:mb-32">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <div className="flex items-center gap-4 mb-6">
-                <div className="h-[1px] w-10 bg-[#C9A84C]" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">The Masterminds</span>
+                <div className="h-[1px] w-10 bg-[#5B96D1]" />
+                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5A7BC1]">The Masterminds</span>
               </div>
-              <h2 className="text-4xl lg:text-6xl font-bold text-[#2C1F0A] font-serif">Creative Team</h2>
+              <h2 className="text-4xl lg:text-6xl font-bold text-[#1D325E] font-serif">Creative Team</h2>
             </motion.div>
-            <p className="text-[#7A6040] max-w-sm text-sm leading-relaxed font-light pb-2">
+            <p className="text-[#4A6E9A] max-w-sm text-sm leading-relaxed font-light pb-2">
               A curated collective of world-class architects, designers, and strategists dedicated to realizing your vision.
             </p>
           </div>
 
           {loading ? (
             <div className="text-center py-20">
-              <div className="w-8 h-8 border-2 border-[#C9A84C]/20 border-t-[#C9A84C] rounded-full animate-spin mx-auto" />
+              <div className="w-8 h-8 border-2 border-[#5B96D1]/20 border-t-[#5B96D1] rounded-full animate-spin mx-auto" />
             </div>
           ) : teamMembers.length === 0 ? (
-            <div className="text-center py-32 border border-dashed border-[#C9A84C]/30 bg-[#FAF6EF]/50">
-              <FaUser className="w-12 h-12 text-[#C9A84C]/40 mx-auto mb-4" />
-              <p className="text-[#7A6040] font-light">No team members available yet.</p>
+            <div className="text-center py-32 border border-dashed border-[#5B96D1]/30 bg-[#F7FBFF]/50">
+              <FaUser className="w-12 h-12 text-[#5B96D1]/40 mx-auto mb-4" />
+              <p className="text-[#4A6E9A] font-light">No team members available yet.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20">
@@ -335,7 +335,7 @@ export default function AboutPage() {
                   className="group flex flex-col"
                 >
                   {/* Clean Sharp Image */}
-                  <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#FAF6EF] mb-8 shadow-sm">
+                  <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#F7FBFF] mb-8 shadow-sm">
                     <img
                       src={member.image}
                       alt={member.name}
@@ -345,33 +345,33 @@ export default function AboutPage() {
                     {/* Social Icons Overlay on Hover */}
                     <div className="absolute bottom-6 left-6 right-6 flex items-center justify-center gap-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 z-20">
                       {member.linkedin && (
-                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/90 backdrop-blur-sm text-[#2C1F0A] rounded-full flex items-center justify-center hover:bg-[#C9A84C] hover:text-white transition-colors">
+                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/90 backdrop-blur-sm text-[#1D325E] rounded-full flex items-center justify-center hover:bg-[#5B96D1] hover:text-white transition-colors">
                           <FaExternalLinkAlt className="w-4 h-4" />
                         </a>
                       )}
                       {member.twitter && (
-                        <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/90 backdrop-blur-sm text-[#2C1F0A] rounded-full flex items-center justify-center hover:bg-[#C9A84C] hover:text-white transition-colors">
+                        <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/90 backdrop-blur-sm text-[#1D325E] rounded-full flex items-center justify-center hover:bg-[#5B96D1] hover:text-white transition-colors">
                           <FaTwitter className="w-4 h-4" />
                         </a>
                       )}
                       {member.email && (
-                        <a href={`mailto:${member.email}`} className="w-10 h-10 bg-white/90 backdrop-blur-sm text-[#2C1F0A] rounded-full flex items-center justify-center hover:bg-[#C9A84C] hover:text-white transition-colors">
+                        <a href={`mailto:${member.email}`} className="w-10 h-10 bg-white/90 backdrop-blur-sm text-[#1D325E] rounded-full flex items-center justify-center hover:bg-[#5B96D1] hover:text-white transition-colors">
                           <FaEnvelope className="w-4 h-4" />
                         </a>
                       )}
                     </div>
                     {/* Gradient for social icons legibility */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#2C1F0A]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1D325E]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
 
                   {/* Refined Text Content */}
                   <div className="flex flex-col px-2">
-                    <h3 className="text-3xl font-serif font-bold text-[#2C1F0A] mb-2">{member.name}</h3>
-                    <p className="text-[#C9A84C] text-[10px] uppercase tracking-[0.25em] font-bold mb-5">{member.position}</p>
-                    <div className="w-full h-[1px] bg-[#C9A84C]/20 mb-5 relative overflow-hidden">
-                      <div className="absolute top-0 left-0 h-full w-0 bg-[#C9A84C] group-hover:w-full transition-all duration-1000 ease-out" />
+                    <h3 className="text-3xl font-serif font-bold text-[#1D325E] mb-2">{member.name}</h3>
+                    <p className="text-[#5B96D1] text-[10px] uppercase tracking-[0.25em] font-bold mb-5">{member.position}</p>
+                    <div className="w-full h-[1px] bg-[#5B96D1]/20 mb-5 relative overflow-hidden">
+                      <div className="absolute top-0 left-0 h-full w-0 bg-[#5B96D1] group-hover:w-full transition-all duration-1000 ease-out" />
                     </div>
-                    <p className="text-[#7A6040] font-light text-sm leading-relaxed">
+                    <p className="text-[#4A6E9A] font-light text-sm leading-relaxed">
                       {member.bio}
                     </p>
                   </div>
@@ -383,21 +383,21 @@ export default function AboutPage() {
       </section>
 
       {/* ── 6. TIMELINE / HISTORY (VERTICAL EDITORIAL DESIGN) ── */}
-      <section className="py-32 lg:py-48 bg-[#FAF6EF] overflow-hidden">
+      <section className="py-32 lg:py-48 bg-[#F7FBFF] overflow-hidden">
         <div className="max-w-[1300px] mx-auto px-6 lg:px-14">
           
           <div className="text-center mb-24 lg:mb-40">
             <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="h-[1px] w-10 bg-[#C9A84C]" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">Timeline</span>
-              <div className="h-[1px] w-10 bg-[#C9A84C]" />
+              <div className="h-[1px] w-10 bg-[#5B96D1]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5A7BC1]">Timeline</span>
+              <div className="h-[1px] w-10 bg-[#5B96D1]" />
             </div>
-            <h2 className="text-4xl lg:text-6xl font-bold text-[#2C1F0A] font-serif">Our Legacy</h2>
+            <h2 className="text-4xl lg:text-6xl font-bold text-[#1D325E] font-serif">Our Legacy</h2>
           </div>
 
           <div className="relative pl-8 md:pl-0">
             {/* Continuous Vertical Line */}
-            <div className="absolute left-[39px] md:left-1/2 top-0 bottom-0 w-[1px] bg-[#C9A84C]/30 md:-translate-x-1/2" />
+            <div className="absolute left-[39px] md:left-1/2 top-0 bottom-0 w-[1px] bg-[#5B96D1]/30 md:-translate-x-1/2" />
 
             <div className="space-y-24 md:space-y-32">
               {journeySteps.map((step, index) => {
@@ -413,23 +413,23 @@ export default function AboutPage() {
                   >
                     
                     {/* Floating Center Node */}
-                    <div className="absolute left-[39px] md:left-1/2 -translate-x-1/2 w-4 h-4 bg-[#FAF6EF] border-2 border-[#C9A84C] rounded-full z-20 shadow-[0_0_0_8px_#FAF6EF]" />
+                    <div className="absolute left-[39px] md:left-1/2 -translate-x-1/2 w-4 h-4 bg-[#F7FBFF] border-2 border-[#5B96D1] rounded-full z-20 shadow-[0_0_0_8px_#F7FBFF]" />
 
                     {/* Content Block */}
                     <div className={`w-full md:w-1/2 relative z-10 pl-16 md:pl-0 ${isEven ? 'md:pl-20' : 'md:pr-20 text-left md:text-right'}`}>
                       
                       {/* Massive Watermark Year */}
-                      <span className={`absolute top-1/2 -translate-y-1/2 text-[7rem] md:text-[10rem] font-bold text-[#E8D5A8]/40 font-serif pointer-events-none -z-10 ${isEven ? 'left-8 md:left-16' : 'left-8 md:auto md:right-16'}`}>
+                      <span className={`absolute top-1/2 -translate-y-1/2 text-[7rem] md:text-[10rem] font-bold text-[#D4E0FF]/40 font-serif pointer-events-none -z-10 ${isEven ? 'left-8 md:left-16' : 'left-8 md:auto md:right-16'}`}>
                         {step.year}
                       </span>
                       
-                      <div className={`inline-block border border-[#C9A84C]/30 px-4 py-1 mb-6 bg-[#FAF6EF] text-[#C9A84C] font-bold text-sm tracking-widest`}>
+                      <div className={`inline-block border border-[#5B96D1]/30 px-4 py-1 mb-6 bg-[#F7FBFF] text-[#5B96D1] font-bold text-sm tracking-widest`}>
                         {step.year}
                       </div>
                       
-                      <h3 className="text-3xl font-bold text-[#2C1F0A] font-serif mb-4">{step.title}</h3>
+                      <h3 className="text-3xl font-bold text-[#1D325E] font-serif mb-4">{step.title}</h3>
                       
-                      <p className="text-[#7A6040] font-light leading-relaxed text-sm md:text-base max-w-sm ml-0 md:ml-auto">
+                      <p className="text-[#4A6E9A] font-light leading-relaxed text-sm md:text-base max-w-sm ml-0 md:ml-auto">
                         {step.description}
                       </p>
                     </div>

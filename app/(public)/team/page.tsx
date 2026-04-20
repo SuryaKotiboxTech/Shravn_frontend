@@ -50,7 +50,7 @@ export default function TeamPage() {
       <div className="min-h-screen bg-zinc-300 font-sans">
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#a68a6b] mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2660A2] mx-auto mb-4"></div>
             <p className="text-slate-600">Loading our team...</p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function TeamPage() {
             <p className="text-slate-600 mb-4">{error}</p>
             <button 
               onClick={fetchTeamMembers}
-              className="px-6 py-2 bg-[#a68a6b] text-white rounded-sm hover:bg-[#8b7355] transition-colors"
+              className="px-6 py-2 bg-[#2660A2] text-white rounded-sm hover:bg-[#1F3E7D] transition-colors"
             >
               Try Again
             </button>
@@ -90,14 +90,14 @@ export default function TeamPage() {
             transition={{ duration: 0.8 }}
           >
             <div className="flex items-center justify-center space-x-3 mb-6">
-              <div className="h-px w-12 bg-[#a68a6b]"></div>
-              <span className="text-[#a68a6b] font-bold uppercase tracking-widest text-sm">
+              <div className="h-px w-12 bg-[#2660A2]"></div>
+              <span className="text-[#2660A2] font-bold uppercase tracking-widest text-sm">
                 Our Team
               </span>
-              <div className="h-px w-12 bg-[#a68a6b]"></div>
+              <div className="h-px w-12 bg-[#2660A2]"></div>
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-slate-900 mb-6">
-              Meet the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a68a6b] to-[#d4bca1]">Visionaries</span>
+              Meet the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5B96D1] to-[#5B7FBB]">Visionaries</span>
             </h1>
             <p className="text-xl text-slate-600 font-light max-w-2xl mx-auto">
               The talented individuals behind our architectural masterpieces, each bringing unique expertise and passion to every project.

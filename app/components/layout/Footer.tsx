@@ -3,6 +3,18 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+interface ContactDetails {
+  phone?: string;
+  email?: string;
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
+    country?: string;
+  };
+}
+
 // Refined social icons matching navbar style
 const FacebookIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -35,18 +47,31 @@ const LinkedinIcon = () => (
 const Footer = () => {
   const year = new Date().getFullYear();
   const [socialLinks, setSocialLinks] = useState({ twitter: '', facebook: '', instagram: '', linkedin: '' });
+  const [contactDetails, setContactDetails] = useState<ContactDetails | null>(null);
 
   useEffect(() => {
-    const fetch_ = async () => {
+    const fetchData = async () => {
       try {
         const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-        const res = await fetch(`${API_URL}/api/social-icons`);
-        if (!res.ok) throw new Error('failed');
-        const data = await res.json();
-        if (data.success && data.data) setSocialLinks({ ...socialLinks, ...data.data });
-      } catch { /* silent fail */ }
+        const [socialRes, contactRes] = await Promise.all([
+          fetch(`${API_URL}/api/social-icons`),
+          fetch(`${API_URL}/api/contact-details`),
+        ]);
+
+        if (socialRes.ok) {
+          const socialData = await socialRes.json();
+          if (socialData.success && socialData.data) setSocialLinks(socialData.data);
+        }
+
+        if (contactRes.ok) {
+          const contactData = await contactRes.json();
+          if (contactData.success && contactData.data) setContactDetails(contactData.data);
+        }
+      } catch {
+        /* silent fail */
+      }
     };
-    fetch_();
+    fetchData();
   }, []);
 
   const trackSocialClick = (channel: string) => {
@@ -74,9 +99,9 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#FAF6EF] relative border-t border-[#C9A84C]/20">
-      {/* Top gold accent line */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent opacity-60" />
+    <footer className="bg-[#F7FBFF] relative border-t border-[#2660A2]/20">
+      {/* Top accent line */}
+      <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#2660A2] to-transparent opacity-60" />
 
       <div className="max-w-[1700px] mx-auto px-6 lg:px-14 pt-16 pb-12">
 
@@ -88,11 +113,11 @@ const Footer = () => {
             <Link href="/" className="inline-block mb-6">
               <img
                 src="/logo2.png"
-                alt="Sukera Dexterity"
+                alt="Shravan Puri Architects"
                 className="h-14 object-contain"
               />
             </Link>
-            <p className="text-[11px] font-light text-[#5C4A1E] leading-relaxed tracking-wide">
+            <p className="text-[11px] font-light text-[#1F3E7D] leading-relaxed tracking-wide">
               Crafting exceptional spaces that blend luxury, functionality, and timeless design.
               Transforming visions into architectural masterpieces.
             </p>
@@ -100,7 +125,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="lg:col-span-1">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#5C4A1E] mb-8">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#1F3E7D] mb-8">
               Quick Links
             </h3>
             <div className="space-y-3">
@@ -108,7 +133,7 @@ const Footer = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="block text-[10px] font-medium uppercase tracking-[0.15em] text-[#8B7355] hover:text-[#C9A84C] transition-colors duration-300"
+                  className="block text-[10px] font-medium uppercase tracking-[0.15em] text-[#5A7BC1] hover:text-[#5B96D1] transition-colors duration-300"
                 >
                   {link.name}
                 </Link>
@@ -118,24 +143,26 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="lg:col-span-1">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#5C4A1E] mb-8">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#162A48] mb-8">
               Contact Info
             </h3>
-            <div className="space-y-4 text-[11px] font-light text-[#5C4A1E] leading-relaxed">
+            <div className="space-y-4 text-[11px] font-light text-[#162A48] leading-relaxed">
               <div>
-                <p className="font-medium text-[#8B7355] mb-1">STUDIO ADDRESS</p>
-                <p>Jaike-e-Jaipur Chowpatty<br />Sirsi Road, Jaipur - 302012<br />Rajasthan, India</p>
+                <p className="font-medium text-[#5B6E9A] mb-1">STUDIO ADDRESS</p>
+                <p>{contactDetails?.address?.street ? `${contactDetails.address.street}` : 'Jaike-e-Jaipur Chowpatty'}<br />
+                  {contactDetails?.address?.city ? `${contactDetails.address.city}, ${contactDetails.address.state}` : 'Sirsi Road, Jaipur - 302012'}<br />
+                  {contactDetails?.address?.country || 'Rajasthan, India'}</p>
               </div>
               <div>
-                <p className="font-medium text-[#8B7355] mb-1">PHONE</p>
-                <a href="tel:+918619633247" className="hover:text-[#C9A84C] transition-colors">
-                  +91-8619633247
+                <p className="font-medium text-[#5B6E9A] mb-1">PHONE</p>
+                <a href={`tel:${contactDetails?.phone || '+918619633247'}`} className="hover:text-[#2660A2] transition-colors">
+                  {contactDetails?.phone || '+91-8619633247'}
                 </a>
               </div>
               <div>
-                <p className="font-medium text-[#8B7355] mb-1">EMAIL</p>
-                <a href="mailto:sukeradexterity@gmail.com" className="hover:text-[#C9A84C] transition-colors">
-                  sukeradexterity@gmail.com
+                <p className="font-medium text-[#5B6E9A] mb-1">EMAIL</p>
+                <a href={`mailto:${contactDetails?.email || 'hello@shravanpuriarchitects.com'}`} className="hover:text-[#2660A2] transition-colors">
+                  {contactDetails?.email || 'hello@shravanpuriarchitects.com'}
                 </a>
               </div>
             </div>
@@ -143,7 +170,7 @@ const Footer = () => {
 
           {/* Social & CTA */}
           <div className="lg:col-span-1">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#5C4A1E] mb-8">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#1F3E7D] mb-8">
               Follow Us
             </h3>
 
@@ -158,7 +185,7 @@ const Footer = () => {
                     rel="noopener noreferrer"
                     aria-label={key}
                     onClick={() => trackSocialClick(key)}
-                    className="text-[#8B7355] hover:text-[#C9A84C] transition-colors duration-300"
+                    className="text-[#5A7BC1] hover:text-[#5B96D1] transition-colors duration-300"
                   >
                     <Icon />
                   </a>
@@ -169,7 +196,7 @@ const Footer = () => {
             {/* CTA Button */}
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center text-[9px] font-black uppercase tracking-[0.2em] px-6 py-3 bg-[#B8872A] text-[#FAF6EF] hover:bg-[#3D2E0A] transition-all duration-300 shadow-[0_2px_16px_rgba(180,130,40,0.2)] hover:shadow-[0_4px_20px_rgba(60,40,10,0.25)]"
+              className="inline-flex items-center justify-center text-[9px] font-black uppercase tracking-[0.2em] px-6 py-3 bg-[#2660A2] text-[#F7FBFF] hover:bg-[#162A48] transition-all duration-300 shadow-[0_2px_16px_rgba(20,42,72,0.16)] hover:shadow-[0_4px_20px_rgba(20,42,72,0.2)]"
             >
               Start Project
             </Link>
@@ -178,16 +205,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="pt-8 border-t border-[#C9A84C]/10">
+        <div className="pt-8 border-t border-[#5B96D1]/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-[9px] uppercase tracking-[0.2em] text-[#8B7355] font-light">
-              © {year} Sukera Dexterity. All rights reserved.
+            <p className="text-[9px] uppercase tracking-[0.2em] text-[#5B6E9A] font-light">
+              © {year} Shravan Puri Architects. All rights reserved.
             </p>
-            <p className="text-[9px] uppercase tracking-[0.2em] text-[#8B7355] font-light">
+            <p className="text-[9px] uppercase tracking-[0.2em] text-[#5B6E9A] font-light">
               Designed & Developed by{' '}
               <a
                 href="#"
-                className="text-[#C9A84C] hover:text-[#B8872A] transition-colors font-medium"
+                className="text-[#2660A2] hover:text-[#2660A2] transition-colors font-medium"
               >
                 Nine Degree
               </a>
@@ -198,7 +225,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom gold line */}
-      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#C9A84C]/25 to-transparent" />
+      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#5B96D1]/25 to-transparent" />
     </footer>
   );
 };

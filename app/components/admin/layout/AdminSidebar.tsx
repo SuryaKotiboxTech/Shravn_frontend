@@ -121,7 +121,7 @@ export default function AdminSidebar({ sidebarOpen = false, setSidebarOpen }: Ad
               </div>
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-white uppercase tracking-wider">Admin Panel</span>
-                <span className="text-[10px] text-slate-500 font-medium">Sukera -dexterity</span>
+                <span className="text-[10px] text-slate-500 font-medium">Shravan Puri Architects</span>
               </div>
             </div>
           </div>

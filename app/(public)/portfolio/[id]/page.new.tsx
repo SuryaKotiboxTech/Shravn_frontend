@@ -100,7 +100,7 @@ export default function ProjectDetailPage() {
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Project Not Found</h1>
-          <Link href="/portfolio" className="text-[#a68a6b] hover:text-[#8b7355]">
+          <Link href="/portfolio" className="text-[#2660A2] hover:text-[#5B96D1]">
             Back to Portfolio
           </Link>
         </div>
@@ -295,7 +295,7 @@ export default function ProjectDetailPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#a68a6b] text-white font-medium rounded-lg hover:bg-[#8b7355] transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#2660A2] text-white font-medium rounded-lg hover:bg-[#1F3E7D] transition-colors"
               >
                 Start Your Project
                 <ExternalLink className="w-4 h-4 ml-2" />

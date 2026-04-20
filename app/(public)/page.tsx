@@ -96,25 +96,27 @@ export default function Home() {
   useEffect(() => {
     const fetchHeroProjects = async () => {
       try {
-        const API_URL = 'https://sukeradexterity.com'
+        const API_URL = 'https://shravanpuriarchitects.com';
         const res = await fetch(`${API_URL}/api/projects?limit=3`);
+        if (!res.ok) throw new Error('Failed to fetch hero projects');
+
         const data = await res.json();
-
-      if (data.success && Array.isArray(data.data)) {
-        setHeroProjects(data.data.slice(0, 3));
-      } else {
+        if (data.success && Array.isArray(data.data)) {
+          const activeProjects = data.data.filter((project: any) => project.isActive !== false);
+          setHeroProjects(activeProjects.slice(0, 3));
+        } else {
+          setHeroProjects([]);
+        }
+      } catch (error) {
+        console.error('Hero fetch error:', error);
         setHeroProjects([]);
+      } finally {
+        setLoadingHero(false);
       }
-    } catch (error) {
-      console.error("Hero fetch error:", error);
-      setHeroProjects([]);
-    } finally {
-      setLoadingHero(false);
-    }
-  };
+    };
 
-  fetchHeroProjects();
-}, []);
+    fetchHeroProjects();
+  }, []);
   // Slick Carousel Settings
   const sliderSettings = {
     dots: true,
@@ -131,7 +133,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-[#FAF6EF]">
+    <div className="bg-[#F7FBFF]">
       {/* Global override for Slick Carousel to match luxury theme */}
       <style>{`
         .luxury-slider .slick-dots {
@@ -139,13 +141,13 @@ export default function Home() {
           z-index: 20;
         }
         .luxury-slider .slick-dots li button:before {
-          color: #FAF6EF;
+          color: #F7FBFF;
           font-size: 14px;
           opacity: 0.4;
           transition: all 0.3s ease;
         }
         .luxury-slider .slick-dots li.slick-active button:before {
-          color: #C9A84C;
+          color: #2660A2;
           opacity: 1;
         }
       `}</style>
@@ -157,7 +159,7 @@ export default function Home() {
       
 
       {/* ── 3. SHOWCASE SLIDER (MAX 90VH) ── */}
-      <section ref={heroRef} className="relative w-full h-[90vh] max-h-[90vh] bg-[#2C1F0A] overflow-hidden">
+      <section ref={heroRef} className="relative w-full h-[90vh] max-h-[90vh] bg-[#162A48] overflow-hidden">
         <Slider {...sliderSettings} className="h-full luxury-slider">
           {activeHeroProjects.map((slide, idx) => (
             <div key={idx} className="relative h-[90vh] max-h-[90vh] outline-none">
@@ -177,19 +179,19 @@ export default function Home() {
                   transition={{ duration: 0.8 }}
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="bg-[#C9A84C] text-[#2C1F0A] text-[9px] font-black uppercase tracking-[0.3em] px-3 py-1.5">
+                    <span className="bg-[#2660A2] text-[#162A48] text-[9px] font-black uppercase tracking-[0.3em] px-3 py-1.5">
                       {slide.category}
                     </span>
-                    <span className="flex items-center gap-1.5 text-[#FAF6EF]/80 text-xs font-light tracking-widest uppercase">
-                      <MapPin className="w-3.5 h-3.5 text-[#C9A84C]" /> {slide.location}
+                    <span className="flex items-center gap-1.5 text-[#F7FBFF]/80 text-xs font-light tracking-widest uppercase">
+                      <MapPin className="w-3.5 h-3.5 text-[#2660A2]" /> {slide.location}
                     </span>
                   </div>
-                  <h2 className="text-5xl lg:text-7xl font-bold text-[#FAF6EF] font-serif mb-6 leading-tight">
+                  <h2 className="text-5xl lg:text-7xl font-bold text-[#F7FBFF] font-serif mb-6 leading-tight">
                     {slide.title}
                   </h2>
                   <Link
                     href="/portfolio"
-                    className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#C9A84C] hover:text-[#FAF6EF] transition-colors group"
+                    className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#2660A2] hover:text-[#F7FBFF] transition-colors group"
                   >
                     Explore Project
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -202,7 +204,7 @@ export default function Home() {
       </section>
 
 
-<section className="py-32 bg-[#FAF6EF] overflow-hidden border-t border-[#C9A84C]/20">
+<section className="py-32 bg-[#F7FBFF] overflow-hidden border-t border-[#2660A2]/20">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           <div className="grid lg:grid-cols-2 gap-0">
             {/* Left image */}
@@ -220,9 +222,9 @@ export default function Home() {
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1500ms]"
                 />
                 {/* Floating stat card */}
-                <div className="absolute -right-8 bottom-16 bg-[#B8872A] text-[#FAF6EF] border-l-4 border-[#8A6020] p-8 shadow-2xl z-10">
+                <div className="absolute -right-8 bottom-16 bg-[#2660A2] text-[#F7FBFF] border-l-4 border-[#6A5F3C] p-8 shadow-2xl z-10">
                   <div className="text-6xl font-bold font-serif leading-none mb-2">
-                    15<span className="text-[#FAF6EF]/60">+</span>
+                    15<span className="text-[#F7FBFF]/60">+</span>
                   </div>
                   <div className="text-[9px] uppercase tracking-[0.3em] font-bold">Years of<br />Excellence</div>
                 </div>
@@ -238,22 +240,22 @@ export default function Home() {
               className="flex flex-col justify-center lg:pl-20 pt-14 lg:pt-0"
             >
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-[1.5px] bg-[#C9A84C]" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">Designed Around You</span>
+                <div className="w-8 h-[1.5px] bg-[#2660A2]" />
+                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5B6E9A]">Designed Around You</span>
               </div>
 
-              <h2 className="text-4xl lg:text-6xl font-bold text-[#2C1F0A] tracking-tight leading-[1.0] mb-8 font-serif">
+              <h2 className="text-4xl lg:text-6xl font-bold text-[#162A48] tracking-tight leading-[1.0] mb-8 font-serif">
                 Crafting Spaces<br />
-                <span className="text-[#9A7840] font-normal italic">Beyond Ordinary.</span>
+                <span className="text-[#8B99B8] font-normal italic">Beyond Ordinary.</span>
               </h2>
 
-              <p className="text-[#6B5530] text-base leading-relaxed font-light mb-12 max-w-lg">
-                At Sukera Dexterity & SP Architects, we design spaces that feel as good as they look. With a focus on creativity, functionality, and detail, we create interiors tailored to your lifestyle — where every space is thoughtfully designed and uniquely yours.
+                <p className="text-[#4B5F8A] text-base leading-relaxed font-light mb-12 max-w-md">
+                At Shravan Puri Architects, we design spaces that feel as good as they look. With a focus on creativity, functionality, and detail, we create interiors tailored to your lifestyle — where every space is thoughtfully designed and uniquely yours.
               </p>
 
               <Link
                 href="/about"
-                className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#B8872A] hover:text-[#2C1F0A] transition-colors group"
+                className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#2660A2] hover:text-[#162A48] transition-colors group"
               >
                 Discover Our Story
                 <span className="w-10 h-px bg-current group-hover:w-14 transition-all duration-300" />
@@ -265,17 +267,17 @@ export default function Home() {
 
 
       {/* ── 4. FEATURED PROJECTS COMPONENT ── */}
-      <section className="bg-[#F5EDD8]">
+      <section className="bg-[#EFF5FF]">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14 pt-28 pb-12 text-center">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-8 h-px bg-[#C9A84C]" />
-            <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">Featured Works</span>
-            <div className="w-8 h-px bg-[#C9A84C]" />
+            <div className="w-8 h-px bg-[#2660A2]" />
+            <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5B6E9A]">Featured Works</span>
+            <div className="w-8 h-px bg-[#2660A2]" />
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-[#2C1F0A] tracking-tight font-serif mb-4">
+          <h2 className="text-4xl lg:text-6xl font-bold text-[#162A48] tracking-tight font-serif mb-4">
             Our Creations & Concepts
           </h2>
-          <p className="text-[#7A6040] text-lg font-light">
+          <p className="text-[#4B5F8A] text-lg font-light">
             Designing spaces that inspire and endure.
           </p>
         </div>
@@ -284,7 +286,7 @@ export default function Home() {
 
       {/* ── 5. SERVICES ── */}
    {/* ── 5. SERVICES (MODERN REDESIGN) ── */}
-      <section className="py-32 bg-[#FAF6EF] border-t border-[#C9A84C]/20">
+      <section className="py-32 bg-[#F7FBFF] border-t border-[#2660A2]/20">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           
           {/* Section Header */}
@@ -295,16 +297,16 @@ export default function Home() {
             className="mb-24"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-[1px] bg-[#C9A84C]" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">Our Proficiency</span>
+              <div className="w-8 h-[1px] bg-[#2660A2]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5B6E9A]">Our Proficiency</span>
             </div>
             
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
-              <h2 className="text-4xl lg:text-6xl font-bold tracking-tight font-serif text-[#2C1F0A] leading-[1.1]">
+              <h2 className="text-4xl lg:text-6xl font-bold tracking-tight font-serif text-[#162A48] leading-[1.1]">
                 Shaping spaces with<br />knowledge, creativity,<br />
-                <span className="italic font-normal text-[#9A7840]">and precision.</span>
+                <span className="italic font-normal text-[#8B99B8]">and precision.</span>
               </h2>
-              <p className="text-[#7A6040] max-w-md text-base leading-relaxed font-light lg:pb-3">
+              <p className="text-[#4B5F8A] max-w-md text-base leading-relaxed font-light lg:pb-3">
                 Design That Performs. Our approach covers every stage of your project — from design consultation to complete turnkey execution, making the entire process simple and stress-free.
               </p>
             </div>
@@ -322,11 +324,11 @@ export default function Home() {
                 className="group flex flex-col"
               >
                 {/* Top Border & Header */}
-                <div className="flex items-center justify-between border-b border-[#C9A84C]/30 pb-6 mb-8 transition-colors duration-700 group-hover:border-[#C9A84C]">
-                  <h3 className="text-3xl font-bold text-[#2C1F0A] font-serif group-hover:text-[#B8872A] transition-colors duration-500">
+                <div className="flex items-center justify-between border-b border-[#2660A2]/30 pb-6 mb-8 transition-colors duration-700 group-hover:border-[#2660A2]">
+                  <h3 className="text-3xl font-bold text-[#162A48] font-serif group-hover:text-[#2660A2] transition-colors duration-500">
                     {service.title}
                   </h3>
-                  <span className="text-[#C9A84C] text-lg font-bold font-serif tracking-widest group-hover:scale-110 transition-transform duration-500">
+                  <span className="text-[#2660A2] text-lg font-bold font-serif tracking-widest group-hover:scale-110 transition-transform duration-500">
                     {service.num}
                   </span>
                 </div>
@@ -334,29 +336,29 @@ export default function Home() {
                 {/* Image Container */}
                 <Link 
                   href="/services" 
-                  className="relative w-full aspect-[16/10] overflow-hidden mb-8 bg-[#F5EDD8] block"
+                  className="relative w-full aspect-[16/10] overflow-hidden mb-8 bg-[#EFF5FF] block"
                 >
                   <img
                     src={service.img}
                     alt={service.title}
                     className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1500ms] ease-out"
                   />
-                  <div className="absolute inset-0 bg-[#2C1F0A]/10 group-hover:bg-transparent transition-colors duration-700" />
+                  <div className="absolute inset-0 bg-[#162A48]/10 group-hover:bg-transparent transition-colors duration-700" />
                   
                   {/* Floating View Text inside image */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FAF6EF]/90 backdrop-blur-md px-6 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center gap-2 text-[#2C1F0A] text-[9px] font-bold uppercase tracking-[0.3em]">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#F7FBFF]/90 backdrop-blur-md px-6 py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center gap-2 text-[#162A48] text-[9px] font-bold uppercase tracking-[0.3em]">
                     Explore Service <ArrowUpRight className="w-3.5 h-3.5" />
                   </div>
                 </Link>
 
                 {/* Description & Button */}
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 pr-4">
-                  <p className="text-[#7A6040] text-sm leading-relaxed font-light max-w-sm">
+                  <p className="text-[#4B5F8A] text-sm leading-relaxed font-light max-w-sm">
                     {service.desc}
                   </p>
                   <Link
                     href="/services"
-                    className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#C9A84C]/50 text-[#A07828] group-hover:bg-[#C9A84C] group-hover:text-[#2C1F0A] group-hover:border-[#C9A84C] transition-all duration-500 flex-shrink-0"
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-full border border-[#2660A2]/50 text-[#5B6E9A] group-hover:bg-[#2660A2] group-hover:text-[#162A48] group-hover:border-[#2660A2] transition-all duration-500 flex-shrink-0"
                   >
                     <ArrowUpRight className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   </Link>
@@ -369,7 +371,7 @@ export default function Home() {
       </section>
 
       {/* ── 6. PROCESS ── */}
-      <section className="py-32 bg-[#2C1F0A]">
+      <section className="py-32 bg-[#162A48]">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -378,17 +380,17 @@ export default function Home() {
             className="text-center mb-20"
           >
             <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="w-10 h-px bg-[#C9A84C]" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#C9A84C]">Methodology</span>
-              <div className="w-10 h-px bg-[#C9A84C]" />
+              <div className="w-10 h-px bg-[#2660A2]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#2660A2]">Methodology</span>
+              <div className="w-10 h-px bg-[#2660A2]" />
             </div>
 
-            <h2 className="text-4xl lg:text-6xl font-bold text-[#FAF6EF] mb-6 leading-tight font-serif">
+            <h2 className="text-4xl lg:text-6xl font-bold text-[#F7FBFF] mb-6 leading-tight font-serif">
               From Concept to{' '}
-              <span className="italic font-normal text-[#C9A84C]">Creation.</span>
+              <span className="italic font-normal text-[#2660A2]">Creation.</span>
             </h2>
 
-            <p className="text-[#C4A97A] font-light max-w-2xl mx-auto text-lg">
+            <p className="text-[#8B99B8] font-light max-w-2xl mx-auto text-lg">
               A structured, transparent approach to bringing your visionary spaces to life.
             </p>
           </motion.div>
@@ -401,20 +403,20 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-[#3D2E0A]/80 border border-[#C9A84C]/20 p-10 hover:border-[#C9A84C]/60 hover:bg-[#3D2E0A] group transition-all duration-500 relative overflow-hidden"
+                className="bg-[#162A48]/80 border border-[#2660A2]/20 p-10 hover:border-[#2660A2]/60 hover:bg-[#162A48] group transition-all duration-500 relative overflow-hidden"
               >
-                <div className="absolute -right-3 -bottom-3 text-[110px] font-bold text-[#C9A84C]/[0.06] group-hover:text-[#C9A84C]/[0.1] transition-colors duration-500 font-serif select-none leading-none">
+                <div className="absolute -right-3 -bottom-3 text-[110px] font-bold text-[#2660A2]/[0.06] group-hover:text-[#2660A2]/[0.1] transition-colors duration-500 font-serif select-none leading-none">
                   {step.num}
                 </div>
 
                 <div className="relative z-10">
-                  <div className="text-[10px] font-bold text-[#C9A84C] tracking-[0.3em] uppercase mb-6">
+                  <div className="text-[10px] font-bold text-[#2660A2] tracking-[0.3em] uppercase mb-6">
                     Phase {step.num}
                   </div>
-                  <h3 className="text-2xl font-bold text-[#FAF6EF] font-serif group-hover:text-[#C9A84C] mb-4 transition-colors">
+                  <h3 className="text-2xl font-bold text-[#F7FBFF] font-serif group-hover:text-[#2660A2] mb-4 transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-[#C4A97A] text-sm leading-relaxed font-light">
+                  <p className="text-[#8B99B8] text-sm leading-relaxed font-light">
                     {step.desc}
                   </p>
                 </div>
@@ -424,7 +426,7 @@ export default function Home() {
         </div>
       </section>
 {/* ── 6. THE ADVANTAGE (WHY CHOOSE US) ── */}
-      <section className="py-32 bg-[#F5EDD8]">
+      <section className="py-32 bg-[#EFF5FF]">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -434,14 +436,14 @@ export default function Home() {
           >
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-8 h-[1px] bg-[#C9A84C]" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">The Advantage</span>
+                <div className="w-8 h-[1px] bg-[#2660A2]" />
+                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5B6E9A]">The Advantage</span>
               </div>
-              <h2 className="text-4xl lg:text-6xl font-bold text-[#2C1F0A] tracking-tight font-serif leading-[1.1]">
-                The Sukera <span className="text-[#B8872A] italic font-normal">Edge.</span>
+              <h2 className="text-4xl lg:text-6xl font-bold text-[#162A48] tracking-tight font-serif leading-[1.1]">
+                The Shravan Puri <span className="text-[#2660A2] italic font-normal">Edge.</span>
               </h2>
             </div>
-            <p className="text-[#7A6040] max-w-sm text-sm leading-relaxed font-light lg:pb-2">
+            <p className="text-[#4B5F8A] max-w-sm text-sm leading-relaxed font-light lg:pb-2">
               Beyond exceptional aesthetics, we provide a holistic, white-glove experience tailored to the most discerning clientele.
             </p>
           </motion.div>
@@ -459,14 +461,14 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="group flex gap-6 p-8 bg-[#FAF6EF] border-l-2 border-transparent hover:border-[#C9A84C] transition-all duration-500 hover:shadow-[0_10px_40px_rgba(180,130,40,0.06)]"
+                className="group flex gap-6 p-8 bg-[#F7FBFF] border-l-2 border-transparent hover:border-[#2660A2] transition-all duration-500 hover:shadow-[0_10px_40px_rgba(20,42,72,0.06)]"
               >
-                <div className="text-3xl font-serif text-[#C9A84C]/40 group-hover:text-[#C9A84C] transition-colors duration-500">
+                <div className="text-3xl font-serif text-[#2660A2]/40 group-hover:text-[#2660A2] transition-colors duration-500">
                   0{idx + 1}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-[#2C1F0A] font-serif mb-3 group-hover:text-[#B8872A] transition-colors">{item.title}</h3>
-                  <p className="text-[#7A6040] text-sm leading-relaxed font-light">{item.desc}</p>
+                  <h3 className="text-lg font-bold text-[#162A48] font-serif mb-3 group-hover:text-[#2660A2] transition-colors">{item.title}</h3>
+                  <p className="text-[#4B5F8A] text-sm leading-relaxed font-light">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -481,10 +483,10 @@ export default function Home() {
     
 
       {/* ── 9. FINAL CTA (MODERN & ELEGANT) ── */}
-      <section className="py-32 lg:py-40 bg-[#F5EDD8] border-t border-[#C9A84C]/20 relative overflow-hidden">
+      <section className="py-32 lg:py-40 bg-[#EFF5FF] border-t border-[#2660A2]/20 relative overflow-hidden">
         {/* Subtle large background typography */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none opacity-[0.03] whitespace-nowrap">
-          <span className="text-[20vw] font-serif font-bold text-[#2C1F0A] leading-none">SUKERA</span>
+          <span className="text-[20vw] font-serif font-bold text-[#162A48] leading-none">SHRAVAN PURI</span>
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -495,26 +497,26 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <div className="flex items-center justify-center gap-3 mb-8">
-              <div className="w-12 h-[1px] bg-[#C9A84C]" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">Commence The Journey</span>
-              <div className="w-12 h-[1px] bg-[#C9A84C]" />
+              <div className="w-12 h-[1px] bg-[#2660A2]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5B6E9A]">Commence The Journey</span>
+              <div className="w-12 h-[1px] bg-[#2660A2]" />
             </div>
 
-            <h2 className="text-5xl lg:text-7xl font-bold text-[#2C1F0A] tracking-tight font-serif leading-[1.1] mb-8">
+            <h2 className="text-5xl lg:text-7xl font-bold text-[#162A48] tracking-tight font-serif leading-[1.1] mb-8">
               Ready to redefine <br className="hidden md:block" />
-              <span className="text-[#B8872A] italic font-normal">your space?</span>
+              <span className="text-[#2660A2] italic font-normal">your space?</span>
             </h2>
 
-            <p className="text-[#7A6040] text-lg leading-relaxed font-light mb-12 max-w-2xl mx-auto">
+            <p className="text-[#4B5F8A] text-lg leading-relaxed font-light mb-12 max-w-2xl mx-auto">
               Schedule a private consultation with our principal architects. Let us translate your vision into a structural masterpiece.
             </p>
 
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-5 px-12 py-6 bg-[#2C1F0A] text-[#FAF6EF] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-[#C9A84C] hover:text-[#2C1F0A] transition-all duration-500 shadow-xl"
+              className="group inline-flex items-center gap-5 px-12 py-6 bg-[#162A48] text-[#F7FBFF] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-[#2660A2] hover:text-[#162A48] transition-all duration-500 shadow-xl"
             >
               Initiate Project
-              <div className="w-8 h-[1px] bg-[#FAF6EF] group-hover:bg-[#2C1F0A] group-hover:w-12 transition-all duration-500 relative">
+              <div className="w-8 h-[1px] bg-[#F7FBFF] group-hover:bg-[#162A48] group-hover:w-12 transition-all duration-500 relative">
                 <ArrowRight className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 translate-x-1/2" />
               </div>
             </Link>

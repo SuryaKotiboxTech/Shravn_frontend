@@ -96,7 +96,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
   };
 
   // Minimalist input styling
-  const inputClass = "w-full border-b border-[#C9A84C]/30 bg-transparent text-[#2C1F0A] font-serif text-base py-3 focus:outline-none focus:border-[#C9A84C] transition-colors placeholder-[#A07828]/40 rounded-none";
+  const inputClass = "w-full border-b border-[#5B96D1]/30 bg-transparent text-[#1D325E] font-serif text-base py-3 focus:outline-none focus:border-[#5B96D1] transition-colors placeholder-[#5A7BC1]/40 rounded-none";
   const selectClass = `${inputClass} appearance-none cursor-pointer`;
 
   return (
@@ -119,52 +119,52 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-[1000px] bg-[#FAF6EF] shadow-[0_30px_100px_rgba(26,18,5,0.4)] flex flex-col md:flex-row border border-[#C9A84C]/20 rounded-sm overflow-hidden"
+            className="relative w-full max-w-[1000px] bg-[#F7FBFF] shadow-[0_30px_100px_rgba(26,18,5,0.4)] flex flex-col md:flex-row border border-[#5B96D1]/20 rounded-sm overflow-hidden"
             style={{ maxHeight: 'calc(100vh - 2rem)' }}
           >
             
             {/* Close Button (Absolute Top Right - extremely high z-index) */}
             <button 
               onClick={onClose} 
-              className="absolute top-4 right-4 z-50 p-2.5 text-[#2C1F0A] hover:text-[#FAF6EF] hover:bg-[#C9A84C] transition-colors bg-[#F5EDD8] md:bg-[#FAF6EF] rounded-full shadow-md"
+              className="absolute top-4 right-4 z-50 p-2.5 text-[#1D325E] hover:text-[#F7FBFF] hover:bg-[#5B96D1] transition-colors bg-[#EFF5FF] md:bg-[#F7FBFF] rounded-full shadow-md"
             >
               <X className="w-5 h-5" />
             </button>
 
             {/* Left Side: Visual Image (Hidden on Mobile) */}
-            <div className="hidden md:flex md:w-5/12 relative bg-[#2C1F0A] flex-col justify-end p-10 lg:p-12 overflow-hidden shrink-0">
+            <div className="hidden md:flex md:w-5/12 relative bg-[#1D325E] flex-col justify-end p-10 lg:p-12 overflow-hidden shrink-0">
               <img 
                 src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                 alt="Architecture Setup" 
                 className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay grayscale-[20%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2C1F0A] via-[#2C1F0A]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1D325E] via-[#1D325E]/40 to-transparent" />
               
               <div className="relative z-10">
-                <div className="h-[1px] w-10 bg-[#C9A84C] mb-6" />
-                <h2 className="text-4xl font-serif text-[#FAF6EF] mb-4 leading-[1.1]">
+                <div className="h-[1px] w-10 bg-[#5B96D1] mb-6" />
+                <h2 className="text-4xl font-serif text-[#F7FBFF] mb-4 leading-[1.1]">
                   Let's build<br/>
-                  <span className="italic text-[#C9A84C] font-normal">your vision.</span>
+                  <span className="italic text-[#5B96D1] font-normal">your vision.</span>
                 </h2>
-                <p className="text-[#E8D5A8]/70 font-light text-sm leading-relaxed">
+                <p className="text-[#D4E0FF]/70 font-light text-sm leading-relaxed">
                   Provide a few details, and our principal architects will be in touch to discuss your requirements.
                 </p>
               </div>
             </div>
 
             {/* Right Side: The Form (Scrollable) */}
-            <div className="w-full md:w-7/12 p-6 sm:p-8 lg:p-12 relative bg-[#FAF6EF] overflow-y-auto custom-scrollbar">
+            <div className="w-full md:w-7/12 p-6 sm:p-8 lg:p-12 relative bg-[#F7FBFF] overflow-y-auto custom-scrollbar">
               {!submitted ? (
                 <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6 pt-4 sm:pt-0">
                   
                   <div className="mb-6 md:mb-8">
-                    <h3 className="text-3xl font-serif text-[#2C1F0A] md:hidden mb-2">Initiate Dialogue</h3>
-                    <p className="text-[#7A6040] text-sm font-light md:hidden">Provide a few details below.</p>
+                    <h3 className="text-3xl font-serif text-[#1D325E] md:hidden mb-2">Initiate Dialogue</h3>
+                    <p className="text-[#4A6E9A] text-sm font-light md:hidden">Provide a few details below.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                     <div>
-                      <label className="block text-[9px] uppercase tracking-[0.2em] text-[#A07828] mb-1 font-bold">Full Name</label>
+                      <label className="block text-[9px] uppercase tracking-[0.2em] text-[#5A7BC1] mb-1 font-bold">Full Name</label>
                       <input
                         type="text"
                         name="name"
@@ -176,7 +176,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                       />
                     </div>
                     <div>
-                      <label className="block text-[9px] uppercase tracking-[0.2em] text-[#A07828] mb-1 font-bold">Phone (Optional)</label>
+                      <label className="block text-[9px] uppercase tracking-[0.2em] text-[#5A7BC1] mb-1 font-bold">Phone (Optional)</label>
                       <input
                         type="tel"
                         name="phone"
@@ -189,7 +189,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                   </div>
 
                   <div>
-                    <label className="block text-[9px] uppercase tracking-[0.2em] text-[#A07828] mb-1 font-bold">Email Address</label>
+                    <label className="block text-[9px] uppercase tracking-[0.2em] text-[#5A7BC1] mb-1 font-bold">Email Address</label>
                     <input
                       type="email"
                       name="email"
@@ -202,7 +202,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                   </div>
 
                   <div>
-                    <label className="block text-[9px] uppercase tracking-[0.2em] text-[#A07828] mb-1 font-bold">Project Type</label>
+                    <label className="block text-[9px] uppercase tracking-[0.2em] text-[#5A7BC1] mb-1 font-bold">Project Type</label>
                     <select name="projectType" value={formData.projectType} onChange={handleInputChange} className={selectClass}>
                       <option value="residential">Residential Space</option>
                       <option value="commercial">Commercial Space</option>
@@ -213,7 +213,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                   </div>
 
                   <div className="pt-2">
-                    <label className="block text-[9px] uppercase tracking-[0.2em] text-[#A07828] mb-1 font-bold">Project Brief</label>
+                    <label className="block text-[9px] uppercase tracking-[0.2em] text-[#5A7BC1] mb-1 font-bold">Project Brief</label>
                     <textarea
                       name="message"
                       value={formData.message}
@@ -228,7 +228,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-6 bg-[#2C1F0A] hover:bg-[#C9A84C] text-[#FAF6EF] hover:text-[#2C1F0A] py-4 sm:py-5 font-bold uppercase tracking-[0.3em] text-[10px] transition-all duration-500 disabled:opacity-70 flex items-center justify-center gap-3 shadow-md"
+                    className="w-full mt-6 bg-[#1D325E] hover:bg-[#5B96D1] text-[#F7FBFF] hover:text-[#1D325E] py-4 sm:py-5 font-bold uppercase tracking-[0.3em] text-[10px] transition-all duration-500 disabled:opacity-70 flex items-center justify-center gap-3 shadow-md"
                   >
                     {isSubmitting ? (
                       <>
@@ -249,12 +249,12 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                   <motion.div 
                     initial={{ scale: 0 }} 
                     animate={{ scale: 1 }} 
-                    className="w-20 h-20 bg-[#F5EDD8] rounded-full flex items-center justify-center mb-8 border border-[#C9A84C]/30"
+                    className="w-20 h-20 bg-[#EFF5FF] rounded-full flex items-center justify-center mb-8 border border-[#5B96D1]/30"
                   >
-                    <CheckCircle2 className="w-10 h-10 text-[#C9A84C]" strokeWidth={1.5} />
+                    <CheckCircle2 className="w-10 h-10 text-[#5B96D1]" strokeWidth={1.5} />
                   </motion.div>
-                  <h3 className="text-3xl font-serif text-[#2C1F0A] mb-4">Inquiry Received</h3>
-                  <p className="text-[#7A6040] text-sm font-light max-w-xs mx-auto leading-relaxed">
+                  <h3 className="text-3xl font-serif text-[#1D325E] mb-4">Inquiry Received</h3>
+                  <p className="text-[#4A6E9A] text-sm font-light max-w-xs mx-auto leading-relaxed">
                     Thank you for reaching out. A principal architect will review your details and contact you shortly.
                   </p>
                 </div>

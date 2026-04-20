@@ -69,9 +69,9 @@ export default function FeaturedProjects() {
 
   if (loading) {
     return (
-      <section className="bg-[#F5EDD8] py-32 flex items-center justify-center border-t border-[#C9A84C]/20">
-        <div className="flex items-center gap-4 text-[#A08040]/50">
-          <div className="w-5 h-5 border-2 border-[#C9A84C]/20 border-t-[#C9A84C] rounded-full animate-spin" />
+      <section className="bg-[#EFF5FF] py-32 flex items-center justify-center border-t border-[#5B96D1]/20">
+        <div className="flex items-center gap-4 text-[#5B7FBB]/50">
+          <div className="w-5 h-5 border-2 border-[#5B96D1]/20 border-t-[#5B96D1] rounded-full animate-spin" />
           <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Loading Portfolio</span>
         </div>
       </section>
@@ -79,7 +79,7 @@ export default function FeaturedProjects() {
   }
 
   return (
-    <section className="bg-[#F5EDD8] border-t border-[#C9A84C]/20 relative">
+    <section className="bg-[#EFF5FF] border-t border-[#5B96D1]/20 relative">
       {/* ── HEADER SECTION ── */}
       <div className="max-w-[1700px] mx-auto px-6 lg:px-14 pt-28 pb-16">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
@@ -90,14 +90,14 @@ export default function FeaturedProjects() {
             className="max-w-2xl"
           >
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-[1px] bg-[#C9A84C]" />
-              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#A07828]">Featured Works</span>
+              <div className="w-8 h-[1px] bg-[#5B96D1]" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5A7BC1]">Featured Works</span>
             </div>
-            <h2 className="text-4xl lg:text-6xl font-bold text-[#2C1F0A] tracking-tight font-serif mb-6 leading-[1.1]">
+            <h2 className="text-4xl lg:text-6xl font-bold text-[#1D325E] tracking-tight font-serif mb-6 leading-[1.1]">
               Our Creations & <br className="hidden sm:block" />
               <span className="italic font-normal text-[#9A7840]">Concepts.</span>
             </h2>
-            <p className="text-[#7A6040] text-lg font-light leading-relaxed">
+            <p className="text-[#4A6E9A] text-lg font-light leading-relaxed">
               Designing spaces that inspire and endure. Step into a curated gallery of our most prestigious architectural and interior transformations.
             </p>
           </motion.div>
@@ -110,7 +110,7 @@ export default function FeaturedProjects() {
           >
             <Link
               href="/portfolio"
-              className="group flex items-center gap-4 px-8 py-4 bg-[#2C1F0A] text-[#FAF6EF] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-[#C9A84C] hover:text-[#2C1F0A] transition-all duration-500 shadow-lg"
+              className="group flex items-center gap-4 px-8 py-4 bg-[#1D325E] text-[#F7FBFF] text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-[#5B96D1] hover:text-[#1D325E] transition-all duration-500 shadow-lg"
             >
               View Full Portfolio
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -133,7 +133,7 @@ export default function FeaturedProjects() {
             >
               <Link
                 href={`/portfolio/${displayed[0]._id || displayed[0].id}`}
-                className="group block relative aspect-[4/3] overflow-hidden bg-[#2C1F0A]"
+                className="group block relative aspect-[4/3] overflow-hidden bg-[#1D325E]"
               >
                 <img
                   src={displayed[0].image || displayed[0].featuredImage}
@@ -141,26 +141,26 @@ export default function FeaturedProjects() {
                   className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[1500ms] ease-out"
                 />
                 {/* Elegant Inner Frame */}
-                <div className="absolute inset-5 border border-[#FAF6EF]/20 z-10 pointer-events-none transition-colors duration-700 group-hover:border-[#C9A84C]/50" />
+                <div className="absolute inset-5 border border-[#F7FBFF]/20 z-10 pointer-events-none transition-colors duration-700 group-hover:border-[#5B96D1]/50" />
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1A1205] via-[#1A1205]/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
                 
                 {/* Content Box */}
                 <div className="absolute bottom-10 left-10 right-10 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
                   <div>
-                    <span className="flex items-center gap-2 text-[#C9A84C] text-[9px] font-bold uppercase tracking-[0.3em] mb-4">
-                      <div className="w-4 h-[1px] bg-[#C9A84C]" />
+                    <span className="flex items-center gap-2 text-[#5B96D1] text-[9px] font-bold uppercase tracking-[0.3em] mb-4">
+                      <div className="w-4 h-[1px] bg-[#5B96D1]" />
                       {displayed[0].category}
                     </span>
-                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FAF6EF] font-serif group-hover:text-[#C9A84C] transition-colors duration-500">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F7FBFF] font-serif group-hover:text-[#5B96D1] transition-colors duration-500">
                       {displayed[0].title}
                     </h3>
-                    <div className="flex items-center gap-2 mt-4 text-[#FAF6EF]/60 text-xs font-light tracking-widest uppercase">
-                      <MapPin className="w-3.5 h-3.5 text-[#C9A84C]" /> {displayed[0].location}
+                    <div className="flex items-center gap-2 mt-4 text-[#F7FBFF]/60 text-xs font-light tracking-widest uppercase">
+                      <MapPin className="w-3.5 h-3.5 text-[#5B96D1]" /> {displayed[0].location}
                     </div>
                   </div>
                   {/* Hover Button */}
-                  <div className="w-14 h-14 rounded-full border border-[#FAF6EF]/30 flex items-center justify-center text-[#FAF6EF] group-hover:bg-[#C9A84C] group-hover:text-[#2C1F0A] group-hover:border-[#C9A84C] transition-all duration-500 flex-shrink-0 backdrop-blur-sm">
+                  <div className="w-14 h-14 rounded-full border border-[#F7FBFF]/30 flex items-center justify-center text-[#F7FBFF] group-hover:bg-[#5B96D1] group-hover:text-[#1D325E] group-hover:border-[#5B96D1] transition-all duration-500 flex-shrink-0 backdrop-blur-sm">
                     <ArrowUpRight className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export default function FeaturedProjects() {
               >
                 <Link
                   href={`/portfolio/${project._id || project.id}`}
-                  className="group block relative aspect-[16/9] overflow-hidden bg-[#2C1F0A]"
+                  className="group block relative aspect-[16/9] overflow-hidden bg-[#1D325E]"
                 >
                   <img
                     src={project.image || project.featuredImage}
@@ -188,22 +188,22 @@ export default function FeaturedProjects() {
                     className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[1500ms]"
                   />
                   {/* Elegant Inner Frame */}
-                  <div className="absolute inset-4 border border-[#FAF6EF]/15 z-10 pointer-events-none transition-colors duration-700 group-hover:border-[#C9A84C]/50" />
+                  <div className="absolute inset-4 border border-[#F7FBFF]/15 z-10 pointer-events-none transition-colors duration-700 group-hover:border-[#5B96D1]/50" />
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1A1205]/95 via-[#1A1205]/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   {/* Content Box */}
                   <div className="absolute bottom-8 left-8 right-8 z-20 flex items-end justify-between gap-4">
                     <div>
-                      <span className="block text-[#C9A84C] text-[8px] font-bold uppercase tracking-[0.3em] mb-2">
+                      <span className="block text-[#5B96D1] text-[8px] font-bold uppercase tracking-[0.3em] mb-2">
                         {project.category}
                       </span>
-                      <h3 className="text-xl sm:text-2xl font-bold text-[#FAF6EF] font-serif group-hover:text-[#C9A84C] transition-colors duration-500">
+                      <h3 className="text-xl sm:text-2xl font-bold text-[#F7FBFF] font-serif group-hover:text-[#5B96D1] transition-colors duration-500">
                         {project.title}
                       </h3>
                     </div>
                     {/* Hover Button */}
-                    <div className="w-10 h-10 rounded-full border border-[#FAF6EF]/20 flex items-center justify-center text-[#FAF6EF] group-hover:bg-[#C9A84C] group-hover:text-[#2C1F0A] group-hover:border-[#C9A84C] transition-all duration-500 flex-shrink-0 backdrop-blur-sm">
+                    <div className="w-10 h-10 rounded-full border border-[#F7FBFF]/20 flex items-center justify-center text-[#F7FBFF] group-hover:bg-[#5B96D1] group-hover:text-[#1D325E] group-hover:border-[#5B96D1] transition-all duration-500 flex-shrink-0 backdrop-blur-sm">
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -223,7 +223,7 @@ export default function FeaturedProjects() {
             >
               <Link
                 href={`/portfolio/${displayed[3]._id || displayed[3].id}`}
-                className="group block relative h-[280px] lg:h-[380px] overflow-hidden bg-[#2C1F0A]"
+                className="group block relative h-[280px] lg:h-[380px] overflow-hidden bg-[#1D325E]"
               >
                 <img
                   src={displayed[3].image || displayed[3].featuredImage}
@@ -231,26 +231,26 @@ export default function FeaturedProjects() {
                   className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-[1500ms]"
                 />
                 {/* Elegant Inner Frame */}
-                <div className="absolute inset-5 border border-[#FAF6EF]/20 z-10 pointer-events-none transition-colors duration-700 group-hover:border-[#C9A84C]/50" />
+                <div className="absolute inset-5 border border-[#F7FBFF]/20 z-10 pointer-events-none transition-colors duration-700 group-hover:border-[#5B96D1]/50" />
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#1A1205]/95 via-[#1A1205]/50 to-transparent transition-opacity duration-500" />
                 
                 {/* Content Box */}
                 <div className="absolute inset-0 z-20 flex flex-col justify-center p-10 lg:p-16 w-full md:w-2/3">
-                  <span className="flex items-center gap-2 text-[#C9A84C] text-[9px] font-bold uppercase tracking-[0.3em] mb-4">
-                    <div className="w-6 h-[1px] bg-[#C9A84C]" />
+                  <span className="flex items-center gap-2 text-[#5B96D1] text-[9px] font-bold uppercase tracking-[0.3em] mb-4">
+                    <div className="w-6 h-[1px] bg-[#5B96D1]" />
                     {displayed[3].category}
                   </span>
-                  <h3 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#FAF6EF] font-serif mb-6 group-hover:text-[#C9A84C] transition-colors duration-500">
+                  <h3 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#F7FBFF] font-serif mb-6 group-hover:text-[#5B96D1] transition-colors duration-500">
                     {displayed[3].title}
                   </h3>
                   
                   <div className="flex items-center gap-6">
-                    <div className="flex items-center gap-2 text-[#FAF6EF]/70 text-xs font-light tracking-widest uppercase">
-                      <MapPin className="w-3.5 h-3.5 text-[#C9A84C]" /> {displayed[3].location}
+                    <div className="flex items-center gap-2 text-[#F7FBFF]/70 text-xs font-light tracking-widest uppercase">
+                      <MapPin className="w-3.5 h-3.5 text-[#5B96D1]" /> {displayed[3].location}
                     </div>
                     
-                    <div className="flex items-center gap-2 text-[#C9A84C] text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
+                    <div className="flex items-center gap-2 text-[#5B96D1] text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
                       View Project <ArrowUpRight className="w-3.5 h-3.5" />
                     </div>
                   </div>
@@ -264,7 +264,7 @@ export default function FeaturedProjects() {
         <div className="mt-10 lg:hidden">
           <Link
             href="/portfolio"
-            className="flex items-center justify-center w-full bg-[#2C1F0A] text-[#FAF6EF] hover:bg-[#C9A84C] hover:text-[#2C1F0A] gap-3 text-[10px] font-bold uppercase tracking-[0.3em] py-5 transition-all duration-300 shadow-lg"
+            className="flex items-center justify-center w-full bg-[#1D325E] text-[#F7FBFF] hover:bg-[#5B96D1] hover:text-[#1D325E] gap-3 text-[10px] font-bold uppercase tracking-[0.3em] py-5 transition-all duration-300 shadow-lg"
           >
             View Full Portfolio <ArrowUpRight className="w-4 h-4" />
           </Link>
