@@ -162,13 +162,13 @@ export default function Home() {
       {/* ── 3. SHOWCASE SLIDER (MAX 90VH) - REDESIGNED ── */}
       <section ref={heroRef} className="relative w-full h-[90vh] max-h-[90vh] bg-[#162A48] overflow-hidden group">
         {/* Logo in top left */}
-        <div className="absolute top-8 left-6 lg:left-16 z-20">
+        {/* <div className="absolute top-8 left-6 lg:left-16 z-20">
           <img
             src="/logo2.png"
             alt="SP Architects"
             className="h-12 object-contain"
           />
-        </div>
+        </div> */}
         <Slider {...sliderSettings} className="h-full luxury-slider">
           {activeHeroProjects.map((slide, idx) => (
             <div key={idx} className="relative h-[90vh] max-h-[90vh] outline-none overflow-hidden">
