@@ -103,8 +103,7 @@ export default function ContactPage() {
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-[100px] font-bold text-[#F7FBFF] font-serif leading-[1.05] tracking-tight drop-shadow-lg">
-              Let's Create <br />
-              <span className="text-[#2660A2] italic font-normal">Extraordinary.</span>
+              Let’s Connect
             </h1>
           </motion.div>
         </div>
@@ -131,7 +130,7 @@ export default function ContactPage() {
                 <span className="italic font-normal text-[#2660A2]">Dialogue.</span>
               </h2>
               <p className="text-[#4B5F8A] text-base leading-relaxed font-light mb-12 max-w-md">
-                Whether you have a specific project in mind, require a detailed consultation, or simply want to explore design possibilities, our principal architects are ready to guide your vision.
+                Together, let’s bring something extraordinary to life. Whether you have a clear vision or just a blank canvas, our team is ready to help you bring your architectural dreams to life.
               </p>
             </div>
 
@@ -144,8 +143,8 @@ export default function ContactPage() {
               </div>
               <div>
                 <span className="text-[9px] uppercase tracking-[0.3em] text-[#5B6E9A] font-bold block mb-2">Digital Desk</span>
-                <a href={`mailto:${contactDetails?.email || 'hello@shravanpuriarchitects.com'}`} className="text-xl font-serif text-[#162A48] hover:text-[#2660A2] transition-colors">
-                  {loadingContact ? 'Loading...' : (contactDetails?.email || 'hello@shravanpuriarchitects.com')}
+                <a href={`mailto:${contactDetails?.email || 'hello@sukeradexterity.com'}`} className="text-xl font-serif text-[#162A48] hover:text-[#2660A2] transition-colors">
+                  {loadingContact ? 'Loading...' : (contactDetails?.email || 'hello@sukeradexterity.com')}
                 </a>
               </div>
             </div>

@@ -119,12 +119,15 @@ export default function AboutPage() {
             </div>
             
             <h1 className="text-4xl sm:text-5xl font-bold text-[#1D325E] tracking-tight font-serif leading-[1.1] mb-6">
-              Crafting <br />
-              <span className="text-[#2660A2] italic font-normal">Masterpieces.</span>
+              Our Design Philosophy
             </h1>
             
+            <p className="text-[#4A6E9A] text-sm leading-relaxed font-light mb-6">
+              We craft sophisticated spaces where elegance meets precision. Through curated materials, refined detailing, and a focus on timeless design, we create interiors that exude luxury while remaining functional and enduring.
+            </p>
+
             <p className="text-[#4A6E9A] text-sm leading-relaxed font-light mb-10">
-              We are a collective of visionary designers and interior professionals dedicated to creating enduring, bespoke environments that perfectly balance luxury with liveability.
+              Inspiring spaces with lasting impact. Developing spaces that combine visual appeal, functionality, and durability—ensuring they influence users positively and perform efficiently in the long run.
             </p>
 
             <div className="flex items-center gap-6">

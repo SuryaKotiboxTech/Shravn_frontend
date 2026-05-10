@@ -78,12 +78,11 @@ export default function ServicesPage() {
             </div>
             
             <h1 className="text-5xl sm:text-6xl lg:text-[90px] font-bold text-[#1D325E] tracking-tight leading-[1.05] font-serif mb-8">
-              Services That <br />
-              <span className="italic font-normal text-[#2660A2]">Deliver Excellence.</span>
+              Our Proficiency
             </h1>
             
             <p className="text-[#4A6E9A] text-base lg:text-lg font-light max-w-2xl mx-auto leading-relaxed mb-16">
-              Creating inspired spaces through strategic design, meticulous management, and flawless execution. From blueprint to final styling, we leave nothing to chance.
+              Shaping spaces with knowledge, creativity, and precision.
             </p>
           </motion.div>
         </div>
@@ -117,6 +116,18 @@ export default function ServicesPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── 1.5. DESIGN THAT PERFORMS ── */}
+      <section className="py-20 bg-[#EFF5FF]">
+        <div className="max-w-[1700px] mx-auto px-6 lg:px-14 text-center">
+          <h2 className="text-4xl lg:text-6xl font-bold text-[#1D325E] font-serif mb-6 leading-tight">
+            Design That Performs
+          </h2>
+          <p className="text-[#4A6E9A] text-base lg:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+            Our approach covers every stage of your project with tailored solutions. Starting from design consultation to complete turnkey execution, we focus on creating refined spaces while making the entire process simple and stress-free.
+          </p>
         </div>
       </section>
 

@@ -56,7 +56,7 @@ export default function AdminSidebar({ sidebarOpen = false, setSidebarOpen }: Ad
         className={`hidden lg:flex bg-slate-950 border-r border-slate-800/60 text-slate-300 transition-all duration-300 ease-in-out ${collapsed ? 'w-20' : 'w-64'} h-screen sticky top-0 flex-col overflow-hidden z-40 shrink-0`}
       >
         {/* Logo & Toggle Header */}
-        <div className="h-20 border-b border-slate-800/60 flex items-center justify-between px-4 shrink-0 relative">
+        <div className="h-20 border-b bg-white border-slate-800/60 flex items-center justify-between px-4 shrink-0 relative">
           
           {/* Custom Logo Image */}
           <div className={`flex items-center overflow-hidden transition-all duration-300 ${collapsed ? 'w-0 opacity-0' : 'w-36 opacity-100'}`}>
@@ -121,7 +121,7 @@ export default function AdminSidebar({ sidebarOpen = false, setSidebarOpen }: Ad
               </div>
               <div className="flex flex-col">
                 <span className="text-xs font-bold text-white uppercase tracking-wider">Admin Panel</span>
-                <span className="text-[10px] text-slate-500 font-medium">Shravan Puri Architects</span>
+                <span className="text-[10px] text-slate-500 font-medium">SP Architects</span>
               </div>
             </div>
           </div>

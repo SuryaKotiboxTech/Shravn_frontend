@@ -113,14 +113,32 @@ const Footer = () => {
             <Link href="/" className="inline-block mb-6">
               <img
                 src="/logo2.png"
-                alt="Shravan Puri Architects"
+                alt="SP Architects"
                 className="h-14 object-contain"
               />
             </Link>
-            <p className="text-[11px] font-light text-[#1F3E7D] leading-relaxed tracking-wide">
-              Crafting exceptional spaces that blend luxury, functionality, and timeless design.
-              Transforming visions into architectural masterpieces.
+            <p className="text-[11px] font-light text-[#1F3E7D] leading-relaxed tracking-wide mb-6">
+              Crafting exceptional spaces that blend luxury, functionality, and timeless design. Transforming visions into architectural masterpieces.
             </p>
+            
+            {/* Social Icons Below Description */}
+            {socials.length > 0 && (
+              <div className="flex items-center gap-3">
+                {socials.map(({ key, href, Icon }) => (
+                  <a
+                    key={key}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={key}
+                    onClick={() => trackSocialClick(key)}
+                    className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EFF5FF] border border-[#2660A2]/20 text-[#5B96D1] hover:text-[#2660A2] hover:border-[#2660A2]/60 hover:bg-[#5B96D1]/10 transition-all duration-300"
+                  >
+                    <Icon />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Quick Links */}
@@ -168,30 +186,11 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Social & CTA */}
+          {/* CTA */}
           <div className="lg:col-span-1">
             <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#1F3E7D] mb-8">
-              Follow Us
+              Connect
             </h3>
-
-            {/* Social Icons */}
-            {socials.length > 0 && (
-              <div className="flex items-center gap-4 mb-8">
-                {socials.map(({ key, href, Icon }) => (
-                  <a
-                    key={key}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={key}
-                    onClick={() => trackSocialClick(key)}
-                    className="text-[#5A7BC1] hover:text-[#5B96D1] transition-colors duration-300"
-                  >
-                    <Icon />
-                  </a>
-                ))}
-              </div>
-            )}
 
             {/* CTA Button */}
             <Link
@@ -208,7 +207,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-[#5B96D1]/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-[9px] uppercase tracking-[0.2em] text-[#5B6E9A] font-light">
-              © {year} Shravan Puri Architects. All rights reserved.
+              © {year} SP Architects. All rights reserved.
             </p>
             <p className="text-[9px] uppercase tracking-[0.2em] text-[#5B6E9A] font-light">
               Designed & Developed by{' '}

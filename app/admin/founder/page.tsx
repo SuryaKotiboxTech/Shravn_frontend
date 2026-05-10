@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Edit, Save, X, Upload, Loader2 } from 'lucide-react';
 
@@ -11,7 +11,6 @@ interface Founder {
   quote: string;
   image: string;
   bio?: string;
-  email?: string;
   linkedin?: string;
   twitter?: string;
   instagram?: string;
@@ -23,16 +22,17 @@ export default function FounderManagementPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [uploadCompleted, setUploadCompleted] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>('');
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [formData, setFormData] = useState<Founder>({
     name: '',
     title: '',
     quote: '',
     image: '',
     bio: '',
-    email: '',
     linkedin: '',
     twitter: '',
     instagram: ''
@@ -72,6 +72,7 @@ export default function FounderManagementPage() {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedFile(file);
+      setUploadCompleted(false);
       // Create preview
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -79,6 +80,10 @@ export default function FounderManagementPage() {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleSelectImage = () => {
+    fileInputRef.current?.click();
   };
 
   const uploadImageToCloudinary = async (file: File) => {
@@ -102,6 +107,7 @@ export default function FounderManagementPage() {
         setMessage({ type: 'success', text: 'Image uploaded successfully!' });
         setSelectedFile(null);
         setImagePreview('');
+        setUploadCompleted(true);
         return uploadResult.url;
       } else {
         throw new Error(uploadResult.message || 'Upload failed');
@@ -152,27 +158,29 @@ export default function FounderManagementPage() {
       quote: '',
       image: '',
       bio: '',
-      email: '',
       linkedin: '',
       twitter: '',
       instagram: ''
     });
+    setSelectedFile(null);
+    setImagePreview('');
+    setUploadCompleted(false);
     setIsEditing(false);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-zinc-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#F7FBFF] flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#a68a6b]"></div>
-          <p className="text-zinc-600 mt-4 font-light">Loading founder details...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#2660A2]"></div>
+          <p className="text-[#4A6E9A] mt-4 font-light">Loading founder details...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#F7FBFF] py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -180,8 +188,8 @@ export default function FounderManagementPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">Founder Management</h1>
-          <p className="text-slate-600 font-light">Update founder details and information</p>
+          <h1 className="text-4xl font-bold text-[#1D325E] mb-2">Founder Management</h1>
+          <p className="text-[#4A6E9A] font-light">Update founder details and information</p>
         </motion.div>
 
         {/* Message */}
@@ -200,11 +208,22 @@ export default function FounderManagementPage() {
           </motion.div>
         )}
 
+        {/* Disclaimer */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6 p-4 bg-[#EFF5FF] border border-[#2660A2]/20 rounded-lg"
+        >
+          <p className="text-[#1F3E7D] text-sm font-light">
+            <strong>Disclaimer:</strong> Please ensure all information provided is accurate and up-to-date. Image uploads should be high-quality and relevant to the founder's profile. Changes will be reflected immediately on the public website.
+          </p>
+        </motion.div>
+
         {/* Main Content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-lg shadow-sm border border-zinc-200"
+          className="bg-white rounded-lg shadow-sm border border-[#2660A2]/20"
         >
           {!isEditing ? (
             // View Mode
@@ -212,7 +231,7 @@ export default function FounderManagementPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 {/* Founder Image */}
                 <div className="md:col-span-1">
-                  <div className="relative aspect-square rounded-lg overflow-hidden bg-zinc-200 shadow-md">
+                  <div className="relative aspect-square rounded-lg overflow-hidden bg-[#EFF5FF] shadow-md">
                     {formData.image && (
                       <img
                         src={formData.image}
@@ -226,34 +245,34 @@ export default function FounderManagementPage() {
                 {/* Founder Details */}
                 <div className="md:col-span-2 space-y-6">
                   <div>
-                    <p className="text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-1">
+                    <p className="text-sm font-semibold text-[#4A6E9A] uppercase tracking-widest mb-1">
                       Name
                     </p>
-                    <h2 className="text-3xl font-serif text-slate-900">{formData.name}</h2>
+                    <h2 className="text-3xl font-serif text-[#1D325E]">{formData.name}</h2>
                   </div>
 
                   <div>
-                    <p className="text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-1">
+                    <p className="text-sm font-semibold text-[#4A6E9A] uppercase tracking-widest mb-1">
                       Title
                     </p>
-                    <p className="text-lg text-slate-700">{formData.title}</p>
+                    <p className="text-lg text-[#1F3E7D]">{formData.title}</p>
                   </div>
 
                   <div>
-                    <p className="text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-2">
+                    <p className="text-sm font-semibold text-[#4A6E9A] uppercase tracking-widest mb-2">
                       Quote
                     </p>
-                    <p className="text-slate-600 font-light italic leading-relaxed">
+                    <p className="text-[#4A6E9A] font-light italic leading-relaxed">
                       "{formData.quote}"
                     </p>
                   </div>
 
                   {formData.bio && (
                     <div>
-                      <p className="text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-2">
+                      <p className="text-sm font-semibold text-[#4A6E9A] uppercase tracking-widest mb-2">
                         Bio
                       </p>
-                      <p className="text-slate-600 font-light leading-relaxed text-sm">
+                      <p className="text-[#4A6E9A] font-light leading-relaxed text-sm">
                         {formData.bio}
                       </p>
                     </div>
@@ -262,7 +281,7 @@ export default function FounderManagementPage() {
                   <div className="pt-4">
                     <button
                       onClick={() => setIsEditing(true)}
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#a68a6b] text-white rounded-lg hover:bg-[#9a7a5a] transition-colors font-semibold"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#2660A2] text-white rounded-lg hover:bg-[#1F3E7D] transition-colors font-semibold"
                     >
                       <Edit className="w-4 h-4" />
                       Edit Details
@@ -272,34 +291,28 @@ export default function FounderManagementPage() {
               </div>
 
               {/* Social Links */}
-              {(formData.email || formData.linkedin || formData.twitter || formData.instagram) && (
-                <div className="pt-8 border-t border-zinc-200">
-                  <p className="text-sm font-semibold text-zinc-500 uppercase tracking-widest mb-4">
+              {(formData.linkedin || formData.twitter || formData.instagram) && (
+                <div className="pt-8 border-t border-[#2660A2]/20">
+                  <p className="text-sm font-semibold text-[#4A6E9A] uppercase tracking-widest mb-4">
                     Social Links
                   </p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {formData.email && (
-                      <div className="p-3 bg-zinc-50 rounded-lg">
-                        <p className="text-xs text-zinc-500 uppercase mb-1">Email</p>
-                        <p className="text-sm text-slate-700 break-all">{formData.email}</p>
-                      </div>
-                    )}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {formData.linkedin && (
-                      <div className="p-3 bg-zinc-50 rounded-lg">
-                        <p className="text-xs text-zinc-500 uppercase mb-1">LinkedIn</p>
-                        <p className="text-sm text-slate-700 truncate">{formData.linkedin}</p>
+                      <div className="p-3 bg-[#EFF5FF] rounded-lg">
+                        <p className="text-xs text-[#4A6E9A] uppercase mb-1">LinkedIn</p>
+                        <p className="text-sm text-[#1D325E] truncate">{formData.linkedin}</p>
                       </div>
                     )}
                     {formData.twitter && (
-                      <div className="p-3 bg-zinc-50 rounded-lg">
-                        <p className="text-xs text-zinc-500 uppercase mb-1">Twitter</p>
-                        <p className="text-sm text-slate-700 truncate">{formData.twitter}</p>
+                      <div className="p-3 bg-[#EFF5FF] rounded-lg">
+                        <p className="text-xs text-[#4A6E9A] uppercase mb-1">Twitter</p>
+                        <p className="text-sm text-[#1D325E] truncate">{formData.twitter}</p>
                       </div>
                     )}
                     {formData.instagram && (
-                      <div className="p-3 bg-zinc-50 rounded-lg">
-                        <p className="text-xs text-zinc-500 uppercase mb-1">Instagram</p>
-                        <p className="text-sm text-slate-700 truncate">{formData.instagram}</p>
+                      <div className="p-3 bg-[#EFF5FF] rounded-lg">
+                        <p className="text-xs text-[#4A6E9A] uppercase mb-1">Instagram</p>
+                        <p className="text-sm text-[#1D325E] truncate">{formData.instagram}</p>
                       </div>
                     )}
                   </div>
@@ -312,49 +325,67 @@ export default function FounderManagementPage() {
               <div className="space-y-6">
                 {/* Image Upload */}
                 <div>
-                  <label className="block text-sm font-semibold text-zinc-700 mb-3">
+                  <label className="block text-sm font-semibold text-[#1D325E] mb-3">
                     Founder Image
                   </label>
-                  <div className="flex gap-4">
-                    <div className="flex-1">
-                      <label className="border-2 border-dashed border-zinc-300 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer hover:border-[#a68a6b] transition-colors">
+                  <div className="flex flex-col lg:flex-row gap-4">
+                    <div className="flex-1 border-2 border-dashed border-[#2660A2]/30 rounded-lg p-6 bg-[#EFF5FF]">
+                      <div className="flex flex-col items-center justify-center gap-4 text-center">
                         {uploading ? (
                           <>
-                            <Loader2 className="w-6 h-6 text-zinc-400 mb-2 animate-spin" />
-                            <span className="text-sm text-zinc-600">Uploading...</span>
+                            <Loader2 className="w-6 h-6 text-[#4A6E9A] mb-2 animate-spin" />
+                            <p className="text-sm text-[#4A6E9A]">Uploading selected image...</p>
                           </>
                         ) : selectedFile ? (
                           <>
-                            <Upload className="w-6 h-6 text-green-600 mb-2" />
-                            <span className="text-sm text-green-600">{selectedFile.name}</span>
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                uploadImageToCloudinary(selectedFile);
-                              }}
-                              className="mt-2 px-4 py-2 bg-[#a68a6b] text-white rounded hover:bg-[#9a7a5a] transition-colors text-sm"
-                            >
-                              Upload Image
-                            </button>
+                            <Upload className="w-6 h-6 text-[#4A6E9A]" />
+                            <p className="text-sm font-semibold text-[#1D325E]">{selectedFile.name}</p>
+                            <p className="text-xs text-[#4A6E9A]">Selected file ready to upload.</p>
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                              <button
+                                type="button"
+                                onClick={() => uploadImageToCloudinary(selectedFile)}
+                                className="px-4 py-2 bg-[#2660A2] text-white rounded-lg hover:bg-[#1F3E7D] transition-colors text-sm"
+                              >
+                                Upload Image
+                              </button>
+                              <button
+                                type="button"
+                                onClick={handleSelectImage}
+                                disabled={uploading}
+                                className="px-4 py-2 border border-[#2660A2]/30 rounded-lg text-sm text-[#1D325E] hover:bg-[#F7FBFF] transition-colors"
+                              >
+                                Choose Different File
+                              </button>
+                            </div>
                           </>
                         ) : (
                           <>
-                            <Upload className="w-6 h-6 text-zinc-400 mb-2" />
-                            <span className="text-sm text-zinc-600">Click to select image</span>
+                            <Upload className="w-6 h-6 text-[#4A6E9A]" />
+                            <p className="text-sm font-semibold text-[#1D325E]">Select an image file</p>
+                            <p className="text-xs text-[#4A6E9A]">Supported: JPG, PNG. Select a file and then click Upload Image.</p>
+                            <button
+                              type="button"
+                              onClick={handleSelectImage}
+                              className="mt-2 px-4 py-2 bg-[#2660A2] text-white rounded-lg hover:bg-[#1F3E7D] transition-colors text-sm"
+                            >
+                              Choose Image
+                            </button>
                           </>
                         )}
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageChange}
-                          className="hidden"
-                          disabled={uploading}
-                        />
-                      </label>
+                      </div>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="hidden"
+                        disabled={uploading}
+                      />
                     </div>
+
                     {(formData.image || imagePreview) && (
-                      <div className="w-24 h-24 rounded-lg overflow-hidden bg-zinc-200 flex-shrink-0">
+                      <div className="w-full lg:w-32 h-32 rounded-lg overflow-hidden bg-[#EFF5FF] flex-shrink-0">
                         <img
                           src={imagePreview || formData.image}
                           alt="Preview"
@@ -363,11 +394,23 @@ export default function FounderManagementPage() {
                       </div>
                     )}
                   </div>
+
+                  <div className="mt-4 text-sm text-[#4A6E9A]">
+                    {selectedFile && !uploading && (
+                      <p>Please upload the selected image before saving changes.</p>
+                    )}
+                    {uploadCompleted && (
+                      <p className="text-emerald-600">Image uploaded successfully. Click Save Changes to save the founder details.</p>
+                    )}
+                    {!selectedFile && !uploadCompleted && (
+                      <p>Choose an image, upload it, then save the page to persist the new founder image.</p>
+                    )}
+                  </div>
                 </div>
 
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-semibold text-zinc-700 mb-2">
+                  <label className="block text-sm font-semibold text-[#1D325E] mb-2">
                     Name *
                   </label>
                   <input
@@ -375,14 +418,14 @@ export default function FounderManagementPage() {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a68a6b] focus:border-transparent"
+                    className="w-full px-4 py-3 border border-[#2660A2]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2660A2] focus:border-transparent"
                     placeholder="Founder name"
                   />
                 </div>
 
                 {/* Title */}
                 <div>
-                  <label className="block text-sm font-semibold text-zinc-700 mb-2">
+                  <label className="block text-sm font-semibold text-[#1D325E] mb-2">
                     Title *
                   </label>
                   <input
@@ -390,14 +433,14 @@ export default function FounderManagementPage() {
                     name="title"
                     value={formData.title}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a68a6b] focus:border-transparent"
+                    className="w-full px-4 py-3 border border-[#2660A2]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2660A2] focus:border-transparent"
                     placeholder="e.g., Principal Architect & CEO"
                   />
                 </div>
 
                 {/* Quote */}
                 <div>
-                  <label className="block text-sm font-semibold text-zinc-700 mb-2">
+                  <label className="block text-sm font-semibold text-[#1D325E] mb-2">
                     Quote *
                   </label>
                   <textarea
@@ -405,14 +448,14 @@ export default function FounderManagementPage() {
                     value={formData.quote}
                     onChange={handleInputChange}
                     rows={4}
-                    className="w-full px-4 py-3 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a68a6b] focus:border-transparent"
+                    className="w-full px-4 py-3 border border-[#2660A2]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2660A2] focus:border-transparent"
                     placeholder="Founder's quote"
                   />
                 </div>
 
                 {/* Bio */}
                 <div>
-                  <label className="block text-sm font-semibold text-zinc-700 mb-2">
+                  <label className="block text-sm font-semibold text-[#1D325E] mb-2">
                     Bio
                   </label>
                   <textarea
@@ -420,32 +463,18 @@ export default function FounderManagementPage() {
                     value={formData.bio}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-4 py-3 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a68a6b] focus:border-transparent"
+                    className="w-full px-4 py-3 border border-[#2660A2]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2660A2] focus:border-transparent"
                     placeholder="Additional biography information"
                   />
                 </div>
 
                 {/* Social Links */}
-                <div className="border-t border-zinc-200 pt-6">
-                  <h3 className="text-lg font-semibold text-slate-900 mb-4">Social Links</h3>
+                <div className="border-t border-[#2660A2]/20 pt-6">
+                  <h3 className="text-lg font-semibold text-[#1D325E] mb-4">Social Links</h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold text-zinc-700 mb-2">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a68a6b] focus:border-transparent"
-                        placeholder="email@example.com"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-zinc-700 mb-2">
+                      <label className="block text-sm font-semibold text-[#1D325E] mb-2">
                         LinkedIn
                       </label>
                       <input
@@ -453,13 +482,13 @@ export default function FounderManagementPage() {
                         name="linkedin"
                         value={formData.linkedin}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a68a6b] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-[#2660A2]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2660A2] focus:border-transparent"
                         placeholder="https://linkedin.com/in/..."
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-zinc-700 mb-2">
+                      <label className="block text-sm font-semibold text-[#1D325E] mb-2">
                         Twitter
                       </label>
                       <input
@@ -467,13 +496,13 @@ export default function FounderManagementPage() {
                         name="twitter"
                         value={formData.twitter}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a68a6b] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-[#2660A2]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2660A2] focus:border-transparent"
                         placeholder="https://twitter.com/..."
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-zinc-700 mb-2">
+                      <label className="block text-sm font-semibold text-[#1D325E] mb-2">
                         Instagram
                       </label>
                       <input
@@ -481,7 +510,7 @@ export default function FounderManagementPage() {
                         name="instagram"
                         value={formData.instagram}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a68a6b] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-[#2660A2]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2660A2] focus:border-transparent"
                         placeholder="https://instagram.com/..."
                       />
                     </div>
@@ -489,11 +518,11 @@ export default function FounderManagementPage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-3 pt-6 border-t border-zinc-200">
+                <div className="flex gap-3 pt-6 border-t border-[#2660A2]/20">
                   <button
                     onClick={handleSave}
-                    disabled={saving}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#a68a6b] text-white rounded-lg hover:bg-[#9a7a5a] transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={saving || (!!selectedFile && !uploadCompleted)}
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#2660A2] text-white rounded-lg hover:bg-[#1F3E7D] transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Save className="w-4 h-4" />
                     {saving ? 'Saving...' : 'Save Changes'}
@@ -501,7 +530,7 @@ export default function FounderManagementPage() {
                   <button
                     onClick={handleCancel}
                     disabled={saving}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-zinc-300 text-slate-700 rounded-lg hover:bg-zinc-50 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-[#2660A2]/30 text-[#1D325E] rounded-lg hover:bg-[#EFF5FF] transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <X className="w-4 h-4" />
                     Cancel

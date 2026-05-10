@@ -91,12 +91,11 @@ export default function PortfolioPage() {
             </div>
             
             <h1 className="text-5xl sm:text-6xl lg:text-[80px] font-bold text-[#1D325E] tracking-tight font-serif leading-[1.05]">
-              Selected <br className="sm:hidden" />
-              <span className="text-[#2660A2] italic font-normal">Works.</span>
+              Our Creations & Concepts
             </h1>
             
             <p className="text-[#4A6E9A] text-base lg:text-lg font-light mt-8 max-w-2xl mx-auto leading-relaxed">
-              Explore our collection of architectural masterpieces, where visionary design meets flawless execution and timeless elegance.
+              Designing spaces that inspire and endure.
             </p>
           </motion.div>
         </div>

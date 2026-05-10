@@ -115,7 +115,7 @@ export default function Navbar() {
             <Link href="/" className="flex-shrink-0 flex items-center group">
               <img
                 src="/logo2.png"
-                alt="Shravan Puri Architects"
+                alt="SP Architects"
                 className="h-12 object-contain transition-opacity duration-300 group-hover:opacity-75"
               />
             </Link>
@@ -134,27 +134,8 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Right: Social Icons + CTA */}
+            {/* Right: CTA Button */}
             <div className="flex items-center gap-6">
-              {socials.length > 0 && (
-                <div className="hidden lg:flex items-center gap-4">
-                  {socials.map(({ key, href, Icon }) => (
-                    <a
-                      key={key}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={key}
-                      onClick={() => trackSocialClick(key)}
-                      className="text-[#2660A2] hover:text-[#2660A2] transition-colors duration-200"
-                    >
-                      <Icon />
-                    </a>
-                  ))}
-                  <div className="w-px h-5 bg-[#5B96D1]/30 mx-1" />
-                </div>
-              )}
-
               {/* CTA Button */}
               <Link
                 href="/contact"

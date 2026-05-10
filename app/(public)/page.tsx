@@ -96,7 +96,7 @@ export default function Home() {
   useEffect(() => {
     const fetchHeroProjects = async () => {
       try {
-        const API_URL = 'https://shravanpuriarchitects.com';
+        const API_URL = 'https://sukeradexterity.com';
         const res = await fetch(`${API_URL}/api/projects?limit=3`);
         if (!res.ok) throw new Error('Failed to fetch hero projects');
 
@@ -117,6 +117,7 @@ export default function Home() {
 
     fetchHeroProjects();
   }, []);
+  
   // Slick Carousel Settings
   const sliderSettings = {
     dots: true,
@@ -137,134 +138,198 @@ export default function Home() {
       {/* Global override for Slick Carousel to match luxury theme */}
       <style>{`
         .luxury-slider .slick-dots {
-          bottom: 40px;
+          bottom: 50px;
           z-index: 20;
         }
+        .luxury-slider .slick-dots li {
+          margin: 0 6px;
+        }
         .luxury-slider .slick-dots li button:before {
-          color: #F7FBFF;
-          font-size: 14px;
-          opacity: 0.4;
-          transition: all 0.3s ease;
+          color: #ffffff;
+          font-size: 10px;
+          opacity: 0.3;
+          transition: all 0.4s ease;
         }
         .luxury-slider .slick-dots li.slick-active button:before {
-          color: #2660A2;
+          color: #ffffff;
+          font-size: 12px;
           opacity: 1;
         }
       `}</style>
 
-      
-      
-
       {/* ── 2. ABOUT ── */}
       
-
-      {/* ── 3. SHOWCASE SLIDER (MAX 90VH) ── */}
-      <section ref={heroRef} className="relative w-full h-[90vh] max-h-[90vh] bg-[#162A48] overflow-hidden">
+      {/* ── 3. SHOWCASE SLIDER (MAX 90VH) - REDESIGNED ── */}
+      <section ref={heroRef} className="relative w-full h-[90vh] max-h-[90vh] bg-[#162A48] overflow-hidden group">
+        {/* Logo in top left */}
+        <div className="absolute top-8 left-6 lg:left-16 z-20">
+          <img
+            src="/logo2.png"
+            alt="SP Architects"
+            className="h-12 object-contain"
+          />
+        </div>
         <Slider {...sliderSettings} className="h-full luxury-slider">
           {activeHeroProjects.map((slide, idx) => (
-            <div key={idx} className="relative h-[90vh] max-h-[90vh] outline-none">
-              <img 
+            <div key={idx} className="relative h-[90vh] max-h-[90vh] outline-none overflow-hidden">
+              <motion.img 
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 10, ease: "easeOut" }}
                 src={slide.image || slide.featuredImage || slide.img || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85'} 
                 alt={slide.title || 'Project Showcase'} 
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1205]/90 via-[#1A1205]/40 to-transparent" />
+              {/* Premium Cinematic Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#162A48]/30 to-[#0A1322]/95" />
               
               {/* Content Overlay */}
-              <div className="absolute inset-0 flex flex-col justify-end pb-32 px-6 lg:px-14 max-w-[1700px] mx-auto w-full">
+              <div className="absolute inset-0 flex flex-col justify-end pb-32 px-6 lg:px-16 max-w-[1700px] mx-auto w-full z-10">
                 <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
+                  transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                  className="max-w-4xl"
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="bg-[#2660A2] text-[#162A48] text-[9px] font-black uppercase tracking-[0.3em] px-3 py-1.5">
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2">
                       {slide.category}
                     </span>
-                    <span className="flex items-center gap-1.5 text-[#F7FBFF]/80 text-xs font-light tracking-widest uppercase">
-                      <MapPin className="w-3.5 h-3.5 text-[#2660A2]" /> {slide.location}
+                    <div className="w-12 h-px bg-white/40" />
+                    <span className="flex items-center gap-2 text-white/80 text-[11px] font-medium tracking-widest uppercase">
+                      <MapPin className="w-4 h-4 text-[#2660A2]" /> {slide.location}
                     </span>
                   </div>
-                  <h2 className="text-5xl lg:text-7xl font-bold text-[#F7FBFF] font-serif mb-6 leading-tight">
+                  <h2 className="text-5xl lg:text-[5.5rem] font-bold text-white font-serif mb-8 leading-[1.05] tracking-tight drop-shadow-2xl">
                     {slide.title}
                   </h2>
                   <Link
                     href="/portfolio"
-                    className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#2660A2] hover:text-[#F7FBFF] transition-colors group"
+                    className="inline-flex items-center gap-4 text-xs font-bold uppercase tracking-[0.25em] text-white hover:text-[#2660A2] transition-colors group/btn bg-white/5 backdrop-blur-sm border border-white/10 px-8 py-4 hover:bg-white/10"
                   >
                     Explore Project
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <span className="bg-[#2660A2] p-2 rounded-full group-hover/btn:scale-110 transition-transform shadow-[0_0_15px_rgba(38,96,162,0.5)]">
+                      <ArrowRight className="w-4 h-4 text-white" />
+                    </span>
                   </Link>
                 </motion.div>
               </div>
             </div>
           ))}
         </Slider>
+
+        {/* Scroll indicator animation */}
+        <motion.div 
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 hidden lg:flex flex-col items-center gap-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+        >
+          <span className="text-[9px] uppercase tracking-[0.4em] text-white/50 font-bold">Scroll</span>
+          <div className="w-[1px] h-12 bg-white/20 overflow-hidden relative">
+            <motion.div 
+              className="w-full h-1/2 bg-white absolute top-0"
+              animate={{ y: [0, 48] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+            />
+          </div>
+        </motion.div>
       </section>
 
+      {/* ── 3. SPACES WE’VE TRANSFORMED ── */}
+      {/* <section className="py-20 bg-[#EFF5FF]">
+        <div className="max-w-[1700px] mx-auto px-6 lg:px-16 text-center">
+          <h2 className="text-4xl lg:text-6xl font-bold text-[#162A48] tracking-tight font-serif mb-4">
+            Spaces We’ve Transformed
+          </h2>
+          <p className="text-[#4B5F8A] text-lg font-light">
+            Thoughtfully designed. Beautifully executed.
+          </p>
+        </div>
+      </section> */}
 
-<section className="py-32 bg-[#F7FBFF] overflow-hidden border-t border-[#2660A2]/20">
-        <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
-          <div className="grid lg:grid-cols-2 gap-0">
-            {/* Left image */}
+      {/* ── 3.5. INTRO SECTION - REDESIGNED ── */}
+      <section className="py-32 lg:py-40 bg-[#F7FBFF] overflow-hidden relative">
+        {/* Decorative Background Element */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-[#EFF5FF] rounded-bl-[200px] opacity-60 pointer-events-none" />
+
+        <div className="max-w-[1700px] mx-auto px-6 lg:px-16 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+            
+            {/* Left image - Editorial Layout */}
             <motion.div
-              initial={{ opacity: 0, x: -60 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.9 }}
-              className="relative"
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="lg:col-span-5 relative"
             >
-              <div className="relative aspect-[4/5] overflow-hidden shadow-[0_20px_80px_rgba(140,100,20,0.15)]">
+              {/* Image Frame with rounded offset */}
+              <div className="relative aspect-[4/5] rounded-tl-[60px] rounded-br-[60px] overflow-hidden shadow-[0_30px_60px_rgba(22,42,72,0.15)] z-10 border-[6px] border-white">
                 <img
                   src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&q=80"
                   alt="Studio Interior"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1500ms]"
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-[2000ms]"
                 />
-                {/* Floating stat card */}
-                <div className="absolute -right-8 bottom-16 bg-[#2660A2] text-[#F7FBFF] border-l-4 border-[#6A5F3C] p-8 shadow-2xl z-10">
-                  <div className="text-6xl font-bold font-serif leading-none mb-2">
-                    15<span className="text-[#F7FBFF]/60">+</span>
-                  </div>
-                  <div className="text-[9px] uppercase tracking-[0.3em] font-bold">Years of<br />Excellence</div>
-                </div>
+                <div className="absolute inset-0 bg-[#162A48]/10 hover:bg-transparent transition-colors duration-700" />
               </div>
+
+              {/* Backdrop outline */}
+              <div className="absolute -inset-4 border border-[#2660A2]/30 rounded-tl-[70px] rounded-br-[70px] -z-10 translate-x-4 translate-y-4" />
+
+              {/* Floating stat card - Glassmorphism */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="absolute -right-6 lg:-right-16 bottom-12 bg-white/85 backdrop-blur-xl border border-white/50 p-8 shadow-[0_20px_40px_rgba(0,0,0,0.06)] z-20 rounded-2xl"
+              >
+                <div className="text-6xl lg:text-7xl font-bold font-serif leading-none mb-3 text-[#162A48]">
+                  15<span className="text-[#2660A2] text-5xl">+</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-[2px] bg-[#2660A2]" />
+                  <div className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#5B6E9A] leading-tight">Years of<br />Excellence</div>
+                </div>
+              </motion.div>
             </motion.div>
 
-            {/* Right text */}
+            {/* Right text - Elegant Typography */}
             <motion.div
-              initial={{ opacity: 0, x: 60 }}
+              initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.9, delay: 0.2 }}
-              className="flex flex-col justify-center lg:pl-20 pt-14 lg:pt-0"
+              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+              className="lg:col-span-7 flex flex-col justify-center pt-16 lg:pt-0 lg:pl-10"
             >
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-[1.5px] bg-[#2660A2]" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#5B6E9A]">Designed Around You</span>
+              <div className="flex items-center gap-4 mb-8">
+                <span className="w-12 h-[1px] bg-[#2660A2]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#2660A2]">Designed Around You</span>
               </div>
 
-              <h2 className="text-4xl lg:text-6xl font-bold text-[#162A48] tracking-tight leading-[1.0] mb-8 font-serif">
+              <h2 className="text-5xl lg:text-[4.5rem] font-bold text-[#162A48] tracking-tight leading-[1.05] mb-8 font-serif">
                 Crafting Spaces<br />
-                <span className="text-[#8B99B8] font-normal italic">Beyond Ordinary.</span>
+                <span className="text-[#8B99B8] font-light italic">Beyond Ordinary.</span>
               </h2>
 
-                <p className="text-[#4B5F8A] text-base leading-relaxed font-light mb-12 max-w-md">
-                At Shravan Puri Architects, we design spaces that feel as good as they look. With a focus on creativity, functionality, and detail, we create interiors tailored to your lifestyle — where every space is thoughtfully designed and uniquely yours.
-              </p>
+              <div className="pl-6 border-l-[3px] border-[#2660A2]/20 mb-10">
+                <p className="text-[#4B5F8A] text-lg leading-relaxed font-light max-w-xl">
+                  At SP Architects, we design spaces that feel as good as they look. With a focus on creativity, functionality, and detail, we create interiors tailored to your lifestyle — where every space is thoughtfully designed and uniquely yours.
+                </p>
+              </div>
 
               <Link
                 href="/about"
-                className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#2660A2] hover:text-[#162A48] transition-colors group"
+                className="inline-flex items-center gap-4 text-[11px] font-bold uppercase tracking-[0.3em] text-[#162A48] hover:text-[#2660A2] transition-colors group w-fit"
               >
-                Discover Our Story
-                <span className="w-10 h-px bg-current group-hover:w-14 transition-all duration-300" />
+                <span className="border-b border-[#162A48] group-hover:border-[#2660A2] pb-1 transition-colors">Discover Our Story</span>
+                <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Link>
             </motion.div>
           </div>
         </div>
       </section>
-
 
       {/* ── 4. FEATURED PROJECTS COMPONENT ── */}
       <section className="bg-[#EFF5FF]">
@@ -284,8 +349,7 @@ export default function Home() {
       </section>
       <FeaturedProjects />
 
-      {/* ── 5. SERVICES ── */}
-   {/* ── 5. SERVICES (MODERN REDESIGN) ── */}
+      {/* ── 5. SERVICES (MODERN REDESIGN) ── */}
       <section className="py-32 bg-[#F7FBFF] border-t border-[#2660A2]/20">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           
@@ -425,7 +489,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-{/* ── 6. THE ADVANTAGE (WHY CHOOSE US) ── */}
+
+      {/* ── 6. THE ADVANTAGE (WHY CHOOSE US) ── */}
       <section className="py-32 bg-[#EFF5FF]">
         <div className="max-w-[1700px] mx-auto px-6 lg:px-14">
           <motion.div

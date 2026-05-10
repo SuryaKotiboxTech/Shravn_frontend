@@ -6,8 +6,11 @@ import { AuthProvider } from '@/app/context/AuthContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Shravan Puri Architects - Refined Architecture & Interiors',
+  title: 'SP Architects - Refined Architecture & Interiors',
   description: 'Creating beautiful spaces that inspire and endure.',
+  icons: {
+    icon: '/logo2.png',
+  },
 };
 
 export default function RootLayout({
