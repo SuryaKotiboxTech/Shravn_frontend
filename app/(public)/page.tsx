@@ -61,28 +61,6 @@ const specialConditions = [
   { title: 'Special Attention', desc: 'Enhanced service for discerning clients who expect nothing but excellence.' },
 ];
 
-// Fallback hero slider projects when API data is unavailable
-const fallbackHeroProjects = [
-  {
-    title: 'The Glass Pavilion',
-    category: 'Residential',
-    location: 'Swiss Alps',
-    img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85',
-  },
-  {
-    title: 'Aura Skyscraper',
-    category: 'Commercial',
-    location: 'Dubai, UAE',
-    img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=85',
-  },
-  {
-    title: 'Zenith Estate',
-    category: 'Luxury Villa',
-    location: 'Malibu, CA',
-    img: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&q=85',
-  }
-];
-
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
@@ -91,7 +69,7 @@ export default function Home() {
   const [heroProjects, setHeroProjects] = useState<any[]>([]);
   const [loadingHero, setLoadingHero] = useState(true);
 
-  const activeHeroProjects = heroProjects.length > 0 ? heroProjects : fallbackHeroProjects;
+  const activeHeroProjects = heroProjects;
 
   useEffect(() => {
     const fetchHeroProjects = async () => {
