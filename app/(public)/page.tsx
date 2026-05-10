@@ -74,7 +74,7 @@ export default function Home() {
   useEffect(() => {
     const fetchHeroProjects = async () => {
       try {
-        const API_URL = 'https://sukeradexterity.com';
+        const API_URL = 'https://shravanpuriarchitects.com';
         const res = await fetch(`${API_URL}/api/projects?limit=3`);
         if (!res.ok) throw new Error('Failed to fetch hero projects');
 
