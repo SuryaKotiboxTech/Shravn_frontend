@@ -169,8 +169,9 @@ export default function Home() {
             className="h-12 object-contain"
           />
         </div> */}
-        <Slider {...sliderSettings} className="h-full luxury-slider">
-          {activeHeroProjects.map((slide, idx) => (
+        {activeHeroProjects.length > 0 && (
+          <Slider {...sliderSettings} className="h-full luxury-slider">
+            {activeHeroProjects.map((slide, idx) => (
             <div key={idx} className="relative h-[90vh] max-h-[90vh] outline-none overflow-hidden">
               <motion.img 
                 initial={{ scale: 1.1 }}
@@ -215,8 +216,9 @@ export default function Home() {
                 </motion.div>
               </div>
             </div>
-          ))}
-        </Slider>
+            ))}
+          </Slider>
+        )}
 
         {/* Scroll indicator animation */}
         <motion.div 
